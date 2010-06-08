@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>David Mini CMS</title>
+<%
+load("header.esp");
+%>
+<body>
+<div id="lCenter">
+	<div id="desktop">
+		<%
+		load("menu.esp");
+		%>
+		<div id="contentPanel" class="centralPanel">
+			<h3>Content panel</h3>
+			<div>
+	                
+				Title:<br/><textarea cols="80" id="title" name="title" rows="1">
+				Your title...
+				</textarea><br/><br/>
+				<textarea cols="80" id="editor1" name="editor1" rows="10">
+				Your text...
+				</textarea>
+				<script type="text/javascript">
+				//<![CDATA[
+	
+					CKEDITOR.replace( 'editor1',
+						{
+							fullPage : true
+						});
+	
+				//]]>
+				</script>
+				<br/>
+				<br/>
+				 <input type="button" id="button" name="button" value="Submit"/>
+			</div>
+		    </div>
+	</div>
+</div>
+
+</body>
+</html>

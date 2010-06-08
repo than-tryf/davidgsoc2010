@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="/apps/david/lava.css" type="text/css" media="screen">
+<script type="text/javascript" src="/apps/david/jquery.js"></script>
+<script type="text/javascript" src="/apps/david/jquery.lavalamp.js"></script>
+<script type="text/javascript" src="/apps/david/jquery.easing.js"></script>
+        <script type="text/javascript">
+        $(function() {
+            $("#menu").lavaLamp({
+                fx: "backout", 
+                speed: 700
+            });
+        });
+</script>
+
+<script type="text/javascript" src="/apps/david/jquery-ui-1.8.custom.min.js"></script>
+<link type="text/css" href="/apps/david/jquery-ui-1.8.custom.css" rel="stylesheet" />
+
+<script type="text/javascript" src="/apps/david/ui.panel.min.js"></script>
+<link type="text/css" href="/apps/david/ui.panel.css" rel="stylesheet" />
+
+<script type="text/javascript" src="/apps/david/jquery.cookie.js"></script>
+	
+<script type="text/javascript" src="/apps/david/ckeditor/ckeditor.js"></script>
+<script src="/apps/david/ckeditor/_samples/sample.js" type="text/javascript"></script>
+<link href="/apps/david/ckeditor/_samples/sample.css" rel="stylesheet" type="text/css" />
+
+<style>
+	html, body{
+	    font-size: 10px;
+	    font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	    padding:0;
+	    margin:0;
+	}
+	.box { margin: 1em }
+	.navPanel { margin: 0 0.5em 0.5em 0.5em; }
+            .centralPanel { margin-bottom: 1em; }
+            .fakeLink{ color:navy; cursor:pointer; }
+	#desktop { background-color:#eee; padding:1.5em; padding-bottom:3em; color:#444; }
+	#container{
+	    margin:0; padding:0;
+	}
+	#lCenter{
+	    padding:1em;
+	    padding-top:0;
+	    overflow:hidden;
+	}
+	#lLeft{
+	    float: left;
+	}
+	#lRight{
+	    float: right;
+	}
+</style>
+<script type="text/javascript">
+	    $(document).ready(
+		function(){
+		    $('#panelCenter_1').panel({
+                        collapsible:true
+                    });
+					
+                    $('#contentPanel').panel({
+                        controls:$('#cntrl').html(),
+                        collapseSpeed:1000
+                    });
+			$('#button').click(function() {
+			    var title = $("#title").val();
+				var text = $("#editor1").val();
+				$.ajax({
+   					type: "POST",
+   					url: "/content/david/*",
+   					data: "title="+title+"&text="+text+"&sling:resourceType=david/view",
+   					success: function(msg){
+     					alert("Entry saved");
+     					window.location = "/content/david.home";
+   					}
+ 				});
+			});
+			
+		}
+	    );
+	</script>
+
+
+    

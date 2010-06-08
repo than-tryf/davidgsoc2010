@@ -1,0 +1,38 @@
+
+<%    
+   var queryManager = currentNode.getSession().getWorkspace().getQueryManager();  
+   var query = queryManager.createQuery("/jcr:root/content/david/element(*, nt:unstructured) order by @created descending", "xpath");
+   var result = query.execute().getNodes();
+%>
+<html>
+<head>
+<title>David Mini CMS</title>
+<%
+load("header.esp");
+%>
+<body>
+<div id="lCenter">
+	<div id="desktop">
+		<%
+		load("menu.esp");
+		%>
+		<div id="contentPanel" class="centralPanel">
+			<h3>Entries</h3>
+			<div>
+	                <%
+			        while(result.hasNext()) {
+			        	post = result.nextNode()
+			        %> 
+	
+						<h3><a href="<%= post.getPath() %>.html"><%=post.title%></a></h3>
+					<%
+					}
+				%>	
+				
+			</div>
+		    </div>
+	</div>
+</div>
+
+</body>
+</html>

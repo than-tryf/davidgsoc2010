@@ -1,0 +1,6 @@
+{ 
+	"name": "Starting point",
+	"primaryNodeType": "nt:unstructured",
+	"sling:resourceType": "david",
+	"jcr:primaryType": "nt:unstructured" 
+}
