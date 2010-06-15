@@ -6,6 +6,7 @@
 <%
 load("header.esp");
 %>
+</head>
 <body>
 <div id="lCenter">
 	<div id="desktop">

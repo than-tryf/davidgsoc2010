@@ -67,7 +67,7 @@
 				$.ajax({
    					type: "POST",
    					url: "/content/david/*",
-   					data: "title="+title+"&text="+text+"&sling:resourceType=david/view",
+   					data: "title="+title+"&text="+text+"&sling:resourceType=david",
    					success: function(msg){
      					alert("Entry saved");
      					window.location = "/content/david.home";
