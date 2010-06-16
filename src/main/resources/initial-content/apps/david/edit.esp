@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>David Mini CMS</title>
+<%
+load("header.esp");
+%>
+</head>
+<body>
+<div id="lCenter">
+	<div id="desktop">
+		<%
+		load("menu.esp");
+		%>
+		<div id="contentPanel" class="centralPanel">
+			<h3>Content panel</h3>
+			<div>
+
+				Title:<br/><textarea cols="80" id="title" name="title" rows="1">
+				<%=currentNode.title%>
+				</textarea><br/><br/>
+				<textarea cols="80" id="editor2" name="editor2" rows="10">
+				<%=currentNode.text%>
+				</textarea>
+				<script type="text/javascript">
+				//<![CDATA[
+
+					CKEDITOR.replace( 'editor2',
+						{
+							fullPage : true
+						});
+
+				//]]>
+				</script>
+				<br/>
+				<br/>
+                                <input type="hidden" name="entrytitle" value="<%= currentNode.getPath() %>" />
+				<input type="button" id="buttonEdit" name="buttonEdit" value="Update"/>
+			</div>
+		    </div>
+	</div>
+</div>
+
+</body>
+</html>
