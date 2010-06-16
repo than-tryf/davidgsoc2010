@@ -62,15 +62,35 @@
                         collapseSpeed:1000
                     });
 			$('#button').click(function() {
-			    var title = $("#title").val();
+                                
+                                var title = $("#title").val();
 				var text = $("#editor1").val();
+                                var editor_data = CKEDITOR.instances.editor1.getData();
+                                text=editor_data;
 				$.ajax({
    					type: "POST",
    					url: "/content/david/*",
    					data: "title="+title+"&text="+text+"&sling:resourceType=david",
    					success: function(msg){
-     					alert("Entry saved");
-     					window.location = "/content/david.home";
+                                            alert("Entry saved");
+                                            window.location = "/content/david.home";
+   					}
+ 				});
+			});
+                        $('#buttonEdit').click(function() {
+                                
+                                var title = $("#title").val();
+				var text = $("#editor2").val();
+                                var editor_data = CKEDITOR.instances.editor2.getData();
+                                
+                                text=editor_data;
+				$.ajax({
+   					type: "POST",
+   					url: $("#entrytitle").val(),
+   					data: "title="+title+"&text="+text+"&sling:resourceType=david",
+   					success: function(msg){
+                                            alert("Entry saved");
+                                            window.location = "/content/david.home";
    					}
  				});
 			});
