@@ -24,7 +24,7 @@ load("header.esp");
 			        	post = result.nextNode()
 			        %> 
 	
-						<h3><a href="<%= post.getPath() %>.html"><%=post.title%></a></h3>
+						<h3><%=post.title%> - <a href="<%= post.getPath() %>.view">READ</a> - <a href="<%= post.getPath() %>.edit">EDIT</a> - <a href="<%= post.getPath() %>.delete">DELETE</a></h3>
 					<%
 					}
 				%>	
