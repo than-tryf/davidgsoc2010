@@ -11,7 +11,31 @@
 load("header.esp");
 %>
 <body>
+<script type="text/javascript">
+    $('a[href=#]').click(function(){
+        alert('YESSSA');
+    });
+    $('#delete-item').click(function() {
+        $("#delete-dialog-confirm").dialog({
+			resizable: false,
+			height:140,
+			modal: true,
+			buttons: {
+				'Delete this item': function() {
+					$(this).dialog('close');
+				},
+				Cancel: function() {
+					$(this).dialog('close');
+				}
+			}
+	});
+    });
+</script>
+    
 <div id="lCenter">
+        <div id="delete-dialog-confirm" title="Delete item">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This item will be permanently deleted. Are you sure?</p>
+        </div>
 	<div id="desktop">
 		<%
 		load("menu.esp");
@@ -24,7 +48,7 @@ load("header.esp");
 			        	post = result.nextNode()
 			        %> 
 	
-						<h3><%=post.title%> - <a href="<%= post.getPath() %>.view">READ</a> - <a href="<%= post.getPath() %>.edit">EDIT</a> - <a href="<%= post.getPath() %>.delete">DELETE</a></h3>
+						<h3><%=post.title%> - <a href="<%= post.getPath() %>.view">READ</a> - <a href="<%= post.getPath() %>.edit">EDIT</a> - <a id="delete-item" href="#">DELETE</a></h3>
 					<%
 					}
 				%>	
