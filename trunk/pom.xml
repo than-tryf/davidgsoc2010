@@ -10,7 +10,7 @@
 
 	<groupId>sling.gsoc</groupId>
 	<artifactId>david</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<name>david</name>
@@ -83,7 +83,7 @@
 									<goal>install</goal>
 								</goals>
 								<configuration>
-									<mountByFS>${fileMount}</mountByFS>
+									<mountByFS>true</mountByFS>
 								</configuration>
 							</execution>
 						</executions>
