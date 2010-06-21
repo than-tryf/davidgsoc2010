@@ -5,7 +5,7 @@
             <ul class="lavaLampNoImage" id="menu">
 			    <li><a href="/content/david.home">Home</a></li>
 			    <li><a href="/content/david.new">New entry</a></li>
-			    <li><a href="/content/david.list.html">List entry</a></li>
+			    <li><a href="/content/david.list">List entry</a></li>
 			    <li><a href="/content/david.search">Search entry</a></li>
 			</ul>  
 		</div>
