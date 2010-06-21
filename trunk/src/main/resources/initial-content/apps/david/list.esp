@@ -14,33 +14,44 @@ load("header.esp");
   jQuery(document).ready(function() {
     $("a.delete").click(function () { 
    		alert($(this).attr("id"));
-   		jQuery("#delete-dialog-confirm").dialog({
-      	bgiframe: true,
-      	autoOpen: false,
-      	height: 100,
-      	modal: true,
-      	buttons: {
-				'Delete this item': function() {
-					$(this).dialog('close');
-				},
-				Cancel: function() {
-					$(this).dialog('close');
-				}
+                var id=$(this).attr("id");
+                var $dialog = $('<div></div>').html('This dialog will show every time!').dialog({
+                    bgiframe: true,
+                    autoOpen: false,
+                    height: 100,
+                    modal: true,
+                    title: 'Delete item',
+                    buttons: {
+			'Delete this item': function() {
+                                $.ajax({
+   					type: "POST",
+   					url: id,
+   					data: ":operation=delete",
+   					success: function(msg){
+                                            alert("Entry deleted");
+                                            $(this).dialog('close');
+                                            location.reload();
+   					},
+                                        error: function(msg){
+                                            alert(msg);
+                                            $(this).dialog('close');
+                                        }
+ 				});
+                    },
+			Cancel: function() {
+				$(this).dialog('close');
 			}
-    });
+		    }
+                });
+                $dialog.dialog('open');
    		return false;
 	}); 
   });
-  function a_onClick() {
-  		jQuery('#delete-dialog-confirm').dialog('open');
-  }
 </script>
 <body>
     
 <div id="lCenter">
-        <div id="delete-dialog-confirm" title="Delete item">
-            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 30px 0;"></span>This item will be deleted. Are you sure?</p>
-        </div>
+       
 	<div id="desktop">
 		<%
 		load("menu.esp");
@@ -53,7 +64,7 @@ load("header.esp");
 			        	post = result.nextNode()
 			        %> 
 	
-						<h3><%=post.title%> - <a href="<%= post.getPath() %>.view">READ</a> - <a href="<%= post.getPath() %>.edit">EDIT</a> - <a id="delete-item" class="delete" href="#">DELETE</a></h3>
+						<h3><%=post.title%> - <a href="<%= post.getPath() %>.view">READ</a> - <a href="<%= post.getPath() %>.edit">EDIT</a> - <a id="<%= post.getPath() %>" class="delete" href="#">DELETE</a></h3>
 					<%
 					}
 				%>	
