@@ -1,10 +1,7 @@
 package sling.gsoc.david.servlet;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
-import javax.servlet.ServletOutputStream;
+import java.io.PrintWriter;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
@@ -66,9 +63,9 @@ public class PdfExtension extends SlingAllMethodsServlet {
             SlingHttpServletResponse resp) {
         try {
             Resource resource = req.getResource();
-            resp.setContentType(CONTENT_TYPE);
+            resp.setContentType("text/plain");
             resp.setCharacterEncoding(ENCODING);
-            resp.setHeader("Content-disposition",
+            /*resp.setHeader("Content-disposition",
                     "inline; filename=\"article.pdf\"");
 
             ServletOutputStream output = resp.getOutputStream();
@@ -77,7 +74,11 @@ public class PdfExtension extends SlingAllMethodsServlet {
             PdfWriter.getInstance(document,output);
             document.open();
             document.add(new Paragraph("Hello World"));
-            document.close();
+            document.close();*/
+            PrintWriter writer=resp.getWriter();
+            writer.println("Trying to create PDF");
+            writer.flush();
+            writer.close();
         } catch (Exception e) {
             // TODO: Modify it with something better
             log.error(e.toString());
