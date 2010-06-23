@@ -1,9 +1,11 @@
 package sling.gsoc.david.servlet;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import javax.servlet.ServletOutputStream;
 import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Properties;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -61,7 +63,7 @@ public class PdfExtension extends SlingAllMethodsServlet {
             Resource resource = req.getResource();
             resp.setContentType("text/plain");
             resp.setCharacterEncoding(ENCODING);
-            /*resp.setHeader("Content-disposition",
+            resp.setHeader("Content-disposition",
                     "inline; filename=\"article.pdf\"");
 
             ServletOutputStream output = resp.getOutputStream();
@@ -70,11 +72,14 @@ public class PdfExtension extends SlingAllMethodsServlet {
             PdfWriter.getInstance(document,output);
             document.open();
             document.add(new Paragraph("Hello World"));
-            document.close();*/
-            PrintWriter writer=resp.getWriter();
-            writer.println("Trying to create PDF");
-            writer.flush();
-            writer.close();
+            document.close();
+            output.flush();
+            output.close();
+            
+            //PrintWriter writer=resp.getWriter();
+            //writer.println("Trying to create PDF");
+            //writer.flush();
+            //writer.close();
         } catch (Exception e) {
             // TODO: Modify it with something better
             log.error(e.toString());

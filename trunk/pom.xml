@@ -45,12 +45,12 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-scr-plugin</artifactId>
                 <executions>
-                  <execution>
-                    <id>generate-scr-scrdescriptor</id>
-                      <goals>
-                        <goal>scr</goal>
-                      </goals>
-                  </execution>
+                    <execution>
+                        <id>generate-scr-scrdescriptor</id>
+                        <goals>
+                            <goal>scr</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -67,7 +67,7 @@
                         </Sling-Initial-Content>
                         <Export-Package>sling.gsoc.david.servlet</Export-Package>
                         <Private-Package>sling.gsoc.david.servlet.*</Private-Package>
-                        <!--<Import-Bundle>com.springsource.com.lowagie.text;version="[2.0.8,2.0.8]"</Import-Bundle>-->
+                        <Embed-Dependency>itextpdf</Embed-Dependency>
                     </instructions>
                 </configuration>
             </plugin>
@@ -126,11 +126,25 @@
             <version>2.0.6</version>
             <scope>provided</scope>
         </dependency>
-        <!--<dependency>
-            <groupId>com.lowagie.text</groupId>
-            <artifactId>com.springsource.com.lowagie.text</artifactId>
-            <version>2.0.8</version>
-        </dependency>-->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.0.2</version>
+            <exclusions>
+                <exclusion>
+                        <groupId>org.bouncycastle</groupId>
+                        <artifactId>bcmail-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                        <groupId>org.bouncycastle</groupId>
+                        <artifactId>bcprov-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                        <groupId>org.bouncycastle</groupId>
+                        <artifactId>bctsp-jdk14</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.compendium</artifactId>
@@ -155,30 +169,6 @@
             <name>Maven Repository for iText</name>
             <url>http://maven.itextpdf.com/</url>
         </repository>
-        <repository>
-    <id>com.springsource.repository.libraries.release</id>
-    <name>SpringSource Enterprise Bundle Repository - SpringSource Library Releases</name>
-    <url>http://repository.springsource.com/maven/libraries/release</url>
-</repository>
-
-<repository>
-    <id>com.springsource.repository.libraries.external</id>
-    <name>SpringSource Enterprise Bundle Repository - External Library Releases</name>
-    <url>http://repository.springsource.com/maven/libraries/external</url>
-</repository>
-
-<repository>
-    <id>com.springsource.repository.bundles.release</id>
-    <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
-    <url>http://repository.springsource.com/maven/bundles/release</url>
-</repository>
-
-<repository>
-    <id>com.springsource.repository.bundles.external</id>
-    <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
-    <url>http://repository.springsource.com/maven/bundles/external</url>
-</repository>
-
     </repositories>
 
 </project>
