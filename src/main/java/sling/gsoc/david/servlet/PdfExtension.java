@@ -2,6 +2,10 @@ package sling.gsoc.david.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Properties;
+import org.apache.felix.scr.annotations.Property;
+import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
@@ -10,29 +14,21 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Sling Servlet registered with PDF extensions
- *
- * @scr.component immediate="true" metatype="no"
- * @scr.service interface="javax.servlet.Servlet"
- *
- * @scr.property name="service.description" value="PDF Extension Servlet"
- * @scr.property name="service.vendor" value="David Mini CMS"
- *
- * @scr.property name="sling.servlet.resourceTypes"
- *               value="sling/servlet/default"
- *
- * @scr.property name="sling.servlet.methods"
- *               values.0="GET"
- *               values.1="POST"
- * 
- * @scr.property name="sling.servlet.extensions"
- *               value = "pdf"
- */
-/**
- *
- * @author Federico Paparoni
- */
+/** Sling Servlet registered with PDF extensions**/
+
+@Component(metatype=false,immediate=true)
+@Service(value=javax.servlet.Servlet.class)
 public class PdfExtension extends SlingAllMethodsServlet {
+
+    @Property(value="PDF Extension Servlet")
+    static final String DESCRIPTION = "service.description";
+    @Property(value="David Mini CMS")
+    static final String VENDOR = "service.vendor";
+    @Property(value="sling/servlet/default")
+    static final String RESOURCE_TYPES = "sling.servlet.resourceTypes";
+    @Property(value="pdf")
+    static final String EXTENSIONS = "sling.servlet.extensions";
+    
 
     private final Logger log = LoggerFactory.getLogger(PdfExtension.class);
     private final String CONTENT_TYPE = "application/pdf";
