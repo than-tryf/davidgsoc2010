@@ -1,8 +1,6 @@
 package sling.gsoc.david.servlet;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+
 import java.io.IOException;
 import javax.servlet.ServletOutputStream;
 import org.apache.felix.scr.annotations.Component;
@@ -15,6 +13,9 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.lowagie.text.Document;
+import com.lowagie.text.pdf.PdfWriter;
+import com.lowagie.text.Paragraph;
 
 /** Sling Servlet registered with PDF extensions**/
 
