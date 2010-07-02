@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling</artifactId>
-        <version>8</version>
+        <version>9</version>
     </parent>
 
     <groupId>sling.gsoc</groupId>
@@ -67,7 +67,17 @@
                         </Sling-Initial-Content>
                         <Export-Package>sling.gsoc.david.servlet</Export-Package>
                         <Private-Package>sling.gsoc.david.servlet.*</Private-Package>
-                        <Import-Package>*</Import-Package>
+                        <Import-Package>!org.bouncycastle.*,
+                            !javax.crypto.*,
+                            !javax.imageio.*,
+                            !javax.xml.transform.*,
+                            !javax.xml.parsers.*,
+                            !javax.swing.*,
+                            !org.w3c.dom.*,
+                            !org.xml.*,
+                            !com.apple.mrj.*,
+                            !org.slf4j.*,
+                            *</Import-Package>
                         <Embed-Dependency>com.springsource.com.lowagie.text</Embed-Dependency>
                     </instructions>
                 </configuration>
@@ -141,7 +151,6 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -152,7 +161,7 @@
             <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
             <url>http://repository.springsource.com/maven/bundles/release</url>
         </repository>
-        
+
         <repository>
             <id>com.springsource.repository.bundles.external</id>
             <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
@@ -161,3 +170,4 @@
     </repositories>
 
 </project>
+

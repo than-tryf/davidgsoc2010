@@ -11,8 +11,7 @@ import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.osgi.service.component.ComponentContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.Paragraph;
@@ -33,16 +32,15 @@ public class PdfExtension extends SlingAllMethodsServlet {
     static final String EXTENSIONS = "sling.servlet.extensions";
     
 
-    private final Logger log = LoggerFactory.getLogger(PdfExtension.class);
     private final String CONTENT_TYPE = "application/pdf";
     private final String ENCODING = "UTF-8";
 
     protected void activate(ComponentContext ctx) {
-        log.info("activate");
+        System.out.println("activate");
     }
 
     protected void deactivate(ComponentContext ctx) {
-        log.info("deactivate");
+        System.out.println("deactivate");
     }
 
     @Override
@@ -72,6 +70,7 @@ public class PdfExtension extends SlingAllMethodsServlet {
 
             PdfWriter.getInstance(document,output);
             document.open();
+
             document.add(new Paragraph("Hello World"));
             document.close();
             output.flush();
@@ -83,7 +82,7 @@ public class PdfExtension extends SlingAllMethodsServlet {
             //writer.close();
         } catch (Exception e) {
             // TODO: Modify it with something better
-            log.error(e.toString());
+            System.out.println(e.toString());
         }
     }
 }
