@@ -63,7 +63,7 @@
                     <instructions>
                         <!-- initial content to be loaded on bundle installation -->
                         <Sling-Initial-Content>
-                            initial-content;overwrite:=true;uninstall:=true
+                            initial-content;overwrite:=true;uninstall:=false
                         </Sling-Initial-Content>
                         <Export-Package>sling.gsoc.david.servlet</Export-Package>
                         <Private-Package>sling.gsoc.david.servlet.*</Private-Package>

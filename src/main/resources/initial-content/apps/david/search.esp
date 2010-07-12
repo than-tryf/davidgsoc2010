@@ -16,16 +16,41 @@ load("header.esp");
 		<div id="contentPanel" class="centralPanel">
 			<h3>Search panel</h3>
 			<div>
+                                <%
+                                if((request.getParameter('qtitle'))||(request.getParameter('qtext'))) {
+                                    var queryManager = currentNode.getSession().getWorkspace().getQueryManager();
+                                    if (request.getParameter('qtitle')
+                                        var query = queryManager.createQuery("/jcr:root/content/david/element(*, nt:unstructured)[jcr:contains(@title, '"+request.getParameter("qt")+"')] order by @created descending", "xpath");
+                                    else
+                                        var query = queryManager.createQuery("/jcr:root/content/david/element(*, nt:unstructured)[jcr:contains(@text, '"+request.getParameter("qt")+"')] order by @created descending", "xpath");
+                                    var result = query.execute().getNodes();
+                                    while(result.hasNext()) {
+                                        post = result.nextNode();
+                                        %>
+                                        <h3><a href="<%= post.getPath() %>.view"><%=post.title%></a></h3>
+                                    <%}
+                                } else {%>
 
-				Search by title:<br/><textarea cols="80" id="title" name="title" rows="1"><br/>
-				<input type="button" id="button" name="button" value="Submit"/>
+                                    <br/>
+                                    <br/>
+                                    Search by title:<br/><br/>
+                                    <form method="GET" action="/content/david.search">
+                                    <input type="text" name="qtitle" size="10" value=""/>
+                                    <input type="button" id="button" name="button" value="Search"/>
+                                    </form>
+                                    <br/><br/>
+                                    <br/>
+                                    <br/>
+                                    Search by text content:<br/><br/>
+                                    <form method="GET" action="/content/david.search">
+                                    <input type="text" name="qtext" size="10" value=""/>
+                                    <input type="button" id="button" name="button" value="Search"/>
+                                    </form>
+                                    <br/><br/>
 
-				<br/>
-                                <br/>
-                                <br/>
-                                Search by title:<br/><textarea cols="80" id="title" name="title" rows="1"><br/>
-				<input type="button" id="button" name="button" value="Submit"/>
-			</div>
+                                <%}%>
+
+                        </div>
 		    </div>
 	</div>
 </div>

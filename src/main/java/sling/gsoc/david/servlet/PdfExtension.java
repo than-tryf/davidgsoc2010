@@ -2,6 +2,7 @@ package sling.gsoc.david.servlet;
 
 
 import java.io.IOException;
+import javax.jcr.RepositoryException;
 import javax.servlet.ServletOutputStream;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
@@ -13,8 +14,18 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.osgi.service.component.ComponentContext;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.Element;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.html.simpleparser.HTMLWorker;
+import com.lowagie.text.html.simpleparser.StyleSheet;
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import javax.jcr.Node;
+import javax.jcr.Session;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.sling.jcr.api.SlingRepository;
 
 /** Sling Servlet registered with PDF extensions**/
 
@@ -31,16 +42,31 @@ public class PdfExtension extends SlingAllMethodsServlet {
     @Property(value="pdf")
     static final String EXTENSIONS = "sling.servlet.extensions";
     
+    static private final String ENCODING = "UTF-8";
 
-    private final String CONTENT_TYPE = "application/pdf";
-    private final String ENCODING = "UTF-8";
+    @Reference
+    private SlingRepository repository;
+    private Session session;
 
     protected void activate(ComponentContext ctx) {
         System.out.println("activate");
+        try {
+            /* TODO
+             * Change this behaviour
+             * to connect the repository
+            */
+            session = repository.loginAdministrative(null);
+        } catch (RepositoryException ex) {
+            System.out.println(ex.toString());
+        }
     }
 
     protected void deactivate(ComponentContext ctx) {
         System.out.println("deactivate");
+        if (session != null) {
+            session.logout();
+            session = null;
+        }
     }
 
     @Override
@@ -60,6 +86,10 @@ public class PdfExtension extends SlingAllMethodsServlet {
             SlingHttpServletResponse resp) {
         try {
             Resource resource = req.getResource();
+            Node node = session.getRootNode().getNode(resource.getPath().substring(1));
+            String title=node.getProperty("title").getString();
+            String text=node.getProperty("text").getString();
+
             resp.setContentType("text/plain");
             resp.setCharacterEncoding(ENCODING);
             resp.setHeader("Content-disposition",
@@ -67,21 +97,28 @@ public class PdfExtension extends SlingAllMethodsServlet {
 
             ServletOutputStream output = resp.getOutputStream();
             Document document = new Document();
-
+            
             PdfWriter.getInstance(document,output);
             document.open();
 
-            document.add(new Paragraph("Hello World"));
+            StyleSheet st = new StyleSheet();
+            st.loadTagStyle("body", "leading", "16,0");
+            document.add(new Paragraph("Title:"+title+"\n\n"));
+
+            ArrayList p = HTMLWorker.parseToList(
+            new InputStreamReader(new ByteArrayInputStream(text.getBytes())), st);
+
+            for (int k = 0; k < p.size(); ++k)
+                document.add((Element)p.get(k));
+
+          
             document.close();
             output.flush();
             output.close();
             
-            //PrintWriter writer=resp.getWriter();
-            //writer.println("Trying to create PDF");
-            //writer.flush();
-            //writer.close();
         } catch (Exception e) {
-            // TODO: Modify it with something better
+            // TODO
+            // Modify it with something better
             System.out.println(e.toString());
         }
     }
