@@ -52,9 +52,9 @@
 </style>
 
 <script type="text/javascript">
-	    $(document).ready(
-		function(){
-		    $('#panelCenter_1').panel({
+    $(document).ready(
+	function(){
+	    $('#panelCenter_1').panel({
             	collapsible:true
             });
 					
@@ -63,48 +63,64 @@
                 collapseSpeed:1000
             });
             
-            $("a.search").click(function () {
-            	
-            }); 
-               
-			$('#button').click(function() {
+            $('#button').click(function() {
                 var title = $("#title").val();
-				var text = $("#editor1").val();
+		var text = $("#editor1").val();
                 var editor_data = CKEDITOR.instances.editor1.getData();
                 text=editor_data;
-				$.ajax({
-   					type: "POST",
-   					url: "/content/david/*",
-   					data: "title="+title+"&text="+text+"&sling:resourceType=david",
-   					success: function(msg){
-                    	alert("Entry saved");
+                var tagValues = $("#tags").val();
+                alert(tagValues);
+                
+                tagValues=tagValues.split(",");
+
+                for(var i=0; i<tagValues.length; i++) {
+                    while(tagValues[i].slice(0, trim.length) == trim)
+                        tagValues[i] = tagValues[i].slice(trim.length);
+                    while(tagValues[i].slice(tagValues[i].length-trim.length) == trim)
+                        tagValues[i] = tagValues[i].slice(0, tagValues[i].length-trim.length);
+                }
+
+                var token = new Array();
+                for(var i=0; i<tagValues.length; i++)
+                    if(tagValues[i] != "")
+                        token.push(tagValues[i]);
+
+                for (var i = 0 ; i < token.length ; i++){
+                    alert(token[i]);
+                }
+		$.ajax({
+                    type: "POST",
+                    url: "/content/david/*",
+                    data: "title="+title+"&text="+text+"&tag=pippo&tag=paperino&sling:resourceType=david",
+                    success: function(msg){
+                        alert("Entry saved");
                         window.location = "/content/david.home";
-   					},
-   					error: function(msg){
-   						alert(msg);
-   					}
- 				});
-			});
+                    },
+                    error: function(msg){
+                        alert(msg);
+                    }
+ 		});
+            });
             
             $('#buttonEdit').click(function() {
-            	var title = $("#title").val();
-				var text = $("#editor2").val();
+                var title = $("#title").val();
+		var text = $("#editor2").val();
                 var editor_data = CKEDITOR.instances.editor2.getData();
                 text=editor_data;
-				$.ajax({
-   					type: "POST",
-   					url: $("#entrytitle").val(),
-   					data: "title="+title+"&text="+text+"&sling:resourceType=david",
-   					success: function(msg){
-                    	alert("Entry saved");
+		$.ajax({
+                    type: "POST",
+                    url: $("#entrytitle").val(),
+                    data: "title="+title+"&text="+text+"&sling:resourceType=david",
+                    success: function(msg){
+                        alert("Entry saved");
                         window.location = "/content/david.home";
-   					},
-   					error: function(msg){
-   						alert(msg);
-   					}
- 				});
-			});
+                    },
+                    error: function(msg){
+                        alert(msg);
+                    }
+ 		});
+            });
 			
-		});
+	});
 </script>
 

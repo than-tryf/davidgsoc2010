@@ -17,12 +17,11 @@ load("header.esp");
 			<h3>Content panel</h3>
 			<div>
 	                
-				Title:<br/><textarea cols="80" id="title" name="title" rows="1">
-				Your title...
-				</textarea><br/><br/>
+				Title:<br/><textarea cols="80" id="title" name="title" rows="1">Your title...</textarea><br/><br/>
 				<textarea cols="80" id="editor1" name="editor1" rows="10">
 				Your text...
 				</textarea>
+                                Tags:<br/><textarea cols="80" id="tags" name="tags" rows="1">tags</textarea><br/><br/>
 				<script type="text/javascript">
 				//<![CDATA[
 	
