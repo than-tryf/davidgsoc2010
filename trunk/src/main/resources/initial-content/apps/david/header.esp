@@ -69,15 +69,11 @@
                 var editor_data = CKEDITOR.instances.editor1.getData();
                 text=editor_data;
                 var tagValues = $("#tags").val();
-                alert(tagValues);
                 
                 tagValues=tagValues.split(",");
 
                 for(var i=0; i<tagValues.length; i++) {
-                    while(tagValues[i].slice(0, trim.length) == trim)
-                        tagValues[i] = tagValues[i].slice(trim.length);
-                    while(tagValues[i].slice(tagValues[i].length-trim.length) == trim)
-                        tagValues[i] = tagValues[i].slice(0, tagValues[i].length-trim.length);
+                    tagValues[i] = tagValues[i].replace(/ /g,'');
                 }
 
                 var token = new Array();
@@ -85,13 +81,16 @@
                     if(tagValues[i] != "")
                         token.push(tagValues[i]);
 
-                for (var i = 0 ; i < token.length ; i++){
-                    alert(token[i]);
+                var data="title="+title+"&text="+text+"&sling:resourceType=david&jcr:mixinTypes=mix:referenceable";
+
+                for (var j = 0 ; j < token.length ; j++){
+                    data=data.concat("&tag="+token[j]);
                 }
+
 		$.ajax({
                     type: "POST",
                     url: "/content/david/*",
-                    data: "title="+title+"&text="+text+"&tag=pippo&tag=paperino&sling:resourceType=david",
+                    data: data,
                     success: function(msg){
                         alert("Entry saved");
                         window.location = "/content/david.home";
@@ -110,7 +109,7 @@
 		$.ajax({
                     type: "POST",
                     url: $("#entrytitle").val(),
-                    data: "title="+title+"&text="+text+"&sling:resourceType=david",
+                    data: "title="+title+"&text="+text+"&sling:resourceType=david&jcr:mixinTypes=mix:referenceable",
                     success: function(msg){
                         alert("Entry saved");
                         window.location = "/content/david.home";

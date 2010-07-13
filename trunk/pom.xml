@@ -65,8 +65,8 @@
                         <Sling-Initial-Content>
                             initial-content;overwrite:=true;uninstall:=false
                         </Sling-Initial-Content>
-                        <Export-Package>sling.gsoc.david.servlet</Export-Package>
-                        <Private-Package>sling.gsoc.david.servlet.*</Private-Package>
+                        <Export-Package>sling.gsoc.david.servlet,sling.gsoc.david.jcr</Export-Package>
+                        <Private-Package>sling.gsoc.david.servlet.*,sling.gsoc.david.jcr.*</Private-Package>
                         <Import-Package>!org.bouncycastle.*,
                             !javax.crypto.*,
                             !javax.imageio.*,
@@ -76,7 +76,7 @@
                             !org.w3c.dom.*,
                             !org.xml.*,
                             !com.apple.mrj.*,
-                            !org.slf4j.*,
+                            org.slf4j.*,
                             *</Import-Package>
                         <Embed-Dependency>com.springsource.com.lowagie.text</Embed-Dependency>
                     </instructions>

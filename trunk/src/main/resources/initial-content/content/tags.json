@@ -1,5 +1,5 @@
 { 
-	"name": "david",
+	"name": "tags",
 	"primaryNodeType": "nt:unstructured",
 	"sling:resourceType": "david",
 	"jcr:primaryType": "nt:unstructured" 
