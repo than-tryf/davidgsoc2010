@@ -2,10 +2,10 @@ package sling.gsoc.david.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
+import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.servlet.ServletOutputStream;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
@@ -20,7 +20,8 @@ import org.slf4j.LoggerFactory;
 
 @Component(metatype = false, immediate = true)
 @Service(value = javax.servlet.Servlet.class)
-public class CloudExtension extends SlingAllMethodsServlet{
+public class CloudExtension extends SlingAllMethodsServlet {
+
     @Property(value = "PDF Extension Servlet")
     static final String DESCRIPTION = "service.description";
     @Property(value = "David Mini CMS")
@@ -30,12 +31,11 @@ public class CloudExtension extends SlingAllMethodsServlet{
     @Property(value = "cloud")
     static final String EXTENSIONS = "sling.servlet.extensions";
     private final String ENCODING = "UTF-8";
-    private final String DAVID_ROOT = "/content/david";
+    private final String TAG_PATH = "/content/tags";
     private final String SERVER_URL = "http://localhost:8080";
     @Reference
     private SlingRepository repository;
     private Session session;
-
     private static final Logger log = LoggerFactory.getLogger(CloudExtension.class);
 
     protected void activate(ComponentContext ctx) {
@@ -64,18 +64,39 @@ public class CloudExtension extends SlingAllMethodsServlet{
             SlingHttpServletResponse resp) {
         try {
             createTagCloud(req, resp);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             log.error(ex.toString());
         }
     }
 
-    private void createTagCloud(SlingHttpServletRequest req, SlingHttpServletResponse resp) throws IOException {
-        String xml="<tags><a href='http://www.roytanck.com' style='22' color='0xff0000' hicolor='0x00cc00'>WordPress</a><a href='http://www.roytanck.com' style='12'>Flash</a><a href='http://www.roytanck.com' style='16'>Plugin</a><a href='http://www.roytanck.com' style='14'>WP-Cumulus</a><a href='http://www.roytanck.com' style='12'>3D</a><a href='http://www.roytanck.com' style='12'>Tag cloud</a><a href='http://www.roytanck.com' style='9'>Roy Tanck</a><a href='http://www.roytanck.com' style='10'>SWFObject</a><a href='http://www.roytanck.com' style='10'>Example</a><a href='http://www.roytanck.com' style='12'>Click</a><a href='http://www.roytanck.com' style='12'>Animation</a></tags>";
+    /**
+     * Create the XML rappresentation of all tags in the repository.
+     *
+     * @param req request
+     * @param resp response
+     * @throws
+     */
+    private void createTagCloud(SlingHttpServletRequest req, SlingHttpServletResponse resp) throws IOException, RepositoryException {
+        log.info("createTagCloud()");
+
+        String xml = "<tags><a href='http://www.roytanck.com' style='22' color='0xff0000' hicolor='0x00cc00'>WordPress</a><a href='http://www.roytanck.com' style='12'>Flash</a><a href='http://www.roytanck.com' style='16'>Plugin</a><a href='http://www.roytanck.com' style='14'>WP-Cumulus</a><a href='http://www.roytanck.com' style='12'>3D</a><a href='http://www.roytanck.com' style='12'>Tag cloud</a><a href='http://www.roytanck.com' style='9'>Roy Tanck</a><a href='http://www.roytanck.com' style='10'>SWFObject</a><a href='http://www.roytanck.com' style='10'>Example</a><a href='http://www.roytanck.com' style='12'>Click</a><a href='http://www.roytanck.com' style='12'>Animation</a></tags>";
         resp.setContentType("text/plain");
         resp.setCharacterEncoding(ENCODING);
         PrintWriter writer = resp.getWriter();
-        writer.print(xml);
+        StringBuffer buffer=new StringBuffer();
+        buffer.append("<tags>");
+        Node rootNode = session.getRootNode().getNode(TAG_PATH.substring(1));
+        if (rootNode.hasNodes()) {
+            NodeIterator iterator=rootNode.getNodes();
+            while(iterator.hasNext()) {
+                Node node=iterator.nextNode();
+                String name=node.getName();
+                String count=node.getProperty("count").getString();
+                buffer.append("<a href='/content/david.taglist?tag=").append(name).append("' style='").append(Integer.parseInt(count)*5).append("'>").append(name).append("</a>");
+            }
+        }
+        buffer.append("</tags>");
+        writer.print(buffer.toString());
         writer.close();
     }
-
 }

@@ -1,0 +1,42 @@
+<%
+   var session = currentNode.getSession();
+   var tag = request.getParameter('tag');
+   var tagNode = session.getRootNode().getNode("content/tags/"+tag);
+%>
+<html>
+<head>
+<title>David Mini CMS</title>
+<%
+load("header.esp");
+%>
+
+<body>
+
+<div id="lCenter">
+
+	<div id="desktop">
+		<%
+		load("menu.esp");
+		%>
+		<div id="contentPanel" class="centralPanel">
+			<h3>Entries</h3>
+			<div>
+                        <%
+                        var uuids=tagNode.getProperty("UUIDs").getValues();
+                        for(var i =0; i<uuids.length; i++) {
+                            var uuid=uuids[i];
+                            var nodeR=session.getNodeByUUID(uuid.getString());
+                            %>
+
+                            <a href='<%=nodeR.getPath() %>.view'><%=nodeR.title%></a><br>
+
+                            <%
+                        }
+
+                        %>
+		    </div>
+	</div>
+</div>
+
+</body>
+</html>

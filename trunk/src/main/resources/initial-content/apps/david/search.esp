@@ -19,7 +19,7 @@ load("header.esp");
                                 <%
                                 if((request.getParameter('qtitle'))||(request.getParameter('qtext'))) {
                                     var queryManager = currentNode.getSession().getWorkspace().getQueryManager();
-                                    if (request.getParameter('qtitle')
+                                    if (request.getParameter('qtitle'))
                                         var query = queryManager.createQuery("/jcr:root/content/david/element(*, nt:unstructured)[jcr:contains(@title, '"+request.getParameter("qt")+"')] order by @created descending", "xpath");
                                     else
                                         var query = queryManager.createQuery("/jcr:root/content/david/element(*, nt:unstructured)[jcr:contains(@text, '"+request.getParameter("qt")+"')] order by @created descending", "xpath");
