@@ -13,8 +13,7 @@ load("header.esp");
 <script type="text/javascript">
   jQuery(document).ready(function() {
     $("a.delete").click(function () { 
-   		alert($(this).attr("id"));
-                var id=$(this).attr("id");
+   		var id=$(this).attr("id");
                 var $dialog = $('<div></div>').html('This dialog will show every time!').dialog({
                     bgiframe: true,
                     autoOpen: false,
@@ -28,7 +27,6 @@ load("header.esp");
    					url: id,
    					data: ":operation=delete",
    					success: function(msg){
-                                            alert("Entry deleted");
                                             $(this).dialog('close');
                                             location.reload();
    					},
