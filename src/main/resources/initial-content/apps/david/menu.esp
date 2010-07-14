@@ -1,14 +1,21 @@
 <div id="panelCenter_1" class="centralPanel">
 		<h3>David Mini CMS based on Apache Sling</h3>
-		<center>
-		<div>
-            <ul class="lavaLampNoImage" id="menu">
-			    <li><a href="/content/david.home">Home</a></li>
-			    <li><a href="/content/david.new">New entry</a></li>
-			    <li><a href="/content/david.list.html">List entry</a></li>
-			    <li><a class="search" href="/content/david.search">Search entry</a></li>
-			</ul>  
-		</div>
-		</center>
+                <table>
+                    <tr>
+                        <td width="33%"><img src='/apps/david/images/logo.png'/></td>
+                        <td width="33%">
+                            <div align="center">
+                                    <ul class="lavaLampNoImage" id="menu">
+                                        <li><a href="/content/david.home">Home</a></li>
+                                        <li><a href="/content/david.new">New entry</a></li>
+                                        <li><a href="/content/david.list.html">List entry</a></li>
+                                        <li><a class="search" href="/content/david.search">Search entry</a></li>
+                                    </ul>
+                            </div>
+                        </td>
+                        <td width="33%">
+                        </td>
+                    </tr>
+                </table>
 </div>
 

@@ -59,11 +59,12 @@ load("header.esp");
 		<div id="contentPanel" class="centralPanel">
 			<h3>Entries</h3>
 			<div>
+                        <h3><a href='/content/david.pdf'>Export list</a></h3>
 	                <%
 			        while(result.hasNext()) {
 			        	post = result.nextNode()
 			        %> 
-	
+
 						<h3><%=post.title%> - <a href="<%= post.getPath() %>.view">READ</a> - <a href="<%= post.getPath() %>.edit">EDIT</a> - <a id="<%= post.getPath() %>" class="delete" href="#">DELETE</a> - <a href="<%= post.getPath() %>.pdf"><img alt="Get pdf" src="/apps/david/images/pdf-icon.png"></a></h3>
 					<%
 					}

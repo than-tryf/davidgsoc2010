@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Calendar;
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -72,7 +73,12 @@ public class TagGenerator implements EventListener {
                 if (event.getType() == Event.NODE_ADDED) {
                     log.info("new upload: {}", event.getPath());
                     Node addedNode = session.getRootNode().getNode(event.getPath().substring(1));
-                    processNode(addedNode);
+                    processAddedNode(addedNode);
+                    log.info("finished processing of {}", event.getPath());
+                } else if (event.getType() == Event.NODE_REMOVED) {
+                    log.info("deleted node: {}", event.getPath());
+                    Node deletedNode = session.getRootNode().getNode(event.getPath().substring(1));
+                    processDeletedNode(deletedNode);
                     log.info("finished processing of {}", event.getPath());
                 }
             } catch (Exception e) {
@@ -81,12 +87,20 @@ public class TagGenerator implements EventListener {
         }
     }
 
-    private void processNode(Node addedNode) throws RepositoryException {
+    private void processAddedNode(Node addedNode) throws RepositoryException {
+        Value[] tagValues=null;
         try{
-            Value[] tagValues=addedNode.getProperty("tag").getValues();
+            tagValues=addedNode.getProperty("tag").getValues();
+        }
+        catch(PathNotFoundException pnfe) {
+            log.info("No tag found for this entry");
+            return;
         }
         catch(ValueFormatException vfe) {
-            
+            //Single property found
+            Value tagValue=addedNode.getProperty("tag").getValue();
+            tagValues=new Value[1];
+            tagValues[0]=tagValue;
         }
         String UUID=addedNode.getUUID();
         log.info("New content available with UUID: "+UUID+" and path: "+addedNode.getPath());
@@ -97,9 +111,21 @@ public class TagGenerator implements EventListener {
         for(int i=0;i<tagValues.length;i++) {
             //ADD +1 TO COUNT PROPERTY
             if (tagsRootNode.hasNode(tagValues[i].getString())) {
+                log.info("Tag value: "+tagValues[i].getString());
                 Node tagNode=tagsRootNode.getNode(tagValues[i].getString());
                 int count=Integer.parseInt(tagNode.getProperty("count").getValue().getString())+1;
-                Value[] UUIDs=tagNode.getProperty("UUID").getValues();
+                Value[] UUIDs=null;
+                
+                try{
+                    UUIDs=tagNode.getProperty("UUIDs").getValues();
+                }
+                catch(ValueFormatException vfe) {
+                    //Single UUID found
+                    Value singleUUID=tagNode.getProperty("UUIDs").getValue();
+                    UUIDs=new Value[1];
+                    UUIDs[0]=singleUUID;
+                }
+                
                 ValueFactory valueFactory=session.getValueFactory();
                 Value value=valueFactory.createValue(UUID);
                 UUIDs=Arrays.copyOf(UUIDs,UUIDs.length+1);
@@ -108,7 +134,7 @@ public class TagGenerator implements EventListener {
                 tagNode.setProperty("count", count);
                 tagNode.setProperty("UUIDs", UUIDs);
                 tagsRootNode.save();
-                log.info("New tag node created");
+                log.info("Tag node updated");
             }
             //CREATE NEW NODE WITH COUNT 1
             else {
@@ -122,6 +148,10 @@ public class TagGenerator implements EventListener {
                 log.info("New tag node created");
             }
         }
+
+    }
+
+    private void processDeletedNode(Node deletedNode) {
 
     }
 }
