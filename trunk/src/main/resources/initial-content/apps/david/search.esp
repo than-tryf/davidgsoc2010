@@ -20,9 +20,9 @@ load("header.esp");
                                 if((request.getParameter('qtitle'))||(request.getParameter('qtext'))) {
                                     var queryManager = currentNode.getSession().getWorkspace().getQueryManager();
                                     if (request.getParameter('qtitle'))
-                                        var query = queryManager.createQuery("/jcr:root/content/david/element(*, nt:unstructured)[jcr:contains(@title, '"+request.getParameter("qt")+"')] order by @created descending", "xpath");
-                                    else
-                                        var query = queryManager.createQuery("/jcr:root/content/david/element(*, nt:unstructured)[jcr:contains(@text, '"+request.getParameter("qt")+"')] order by @created descending", "xpath");
+                                        var query = queryManager.createQuery("/jcr:root/content/david/element(*, nt:unstructured)[jcr:like(@title, '%"+request.getParameter("qtitle")+"%')] order by @created descending", "xpath");
+                                    else 
+                                        var query = queryManager.createQuery("/jcr:root/content/david/element(*, nt:unstructured)[jcr:like(@text, '%"+request.getParameter("qtext")+"%')] order by @created descending", "xpath");
                                     var result = query.execute().getNodes();
                                     while(result.hasNext()) {
                                         post = result.nextNode();
@@ -35,7 +35,7 @@ load("header.esp");
                                     <br/>
                                     Search by title:<br/><br/>
                                     <form method="GET" action="/content/david.search">
-                                    <input type="text" name="qtitle" size="10" value=""/>
+                                    <input type="text" name="qtitle" size="20" value=""/>
                                     <input type="button" id="button" name="button" value="Search"/>
                                     </form>
                                     <br/><br/>
@@ -43,11 +43,10 @@ load("header.esp");
                                     <br/>
                                     Search by text content:<br/><br/>
                                     <form method="GET" action="/content/david.search">
-                                    <input type="text" name="qtext" size="10" value=""/>
+                                    <input type="text" name="qtext" size="20" value=""/>
                                     <input type="button" id="button" name="button" value="Search"/>
                                     </form>
                                     <br/><br/>
-
                                 <%}%>
 
                         </div>
