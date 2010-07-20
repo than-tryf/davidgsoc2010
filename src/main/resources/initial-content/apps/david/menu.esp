@@ -13,9 +13,17 @@
                                     </ul>
                             </div>
                         </td>
-                        <td width="33%">
+                        <td width="33%" align="right">
+                        Logged as: <b id="username">????</b>
                         </td>
                     </tr>
                 </table>
+                <script language="javascript">
+                    var info = Sling.getSessionInfo();
+                    if (info.userID=="anonymous")
+                        document.getElementById("username").innerHTML = info.userID+" <a href='/system/sling/login'>Login</a>";
+                    else
+                        document.getElementById("username").innerHTML = info.userID;
+                </script>
 </div>
 
