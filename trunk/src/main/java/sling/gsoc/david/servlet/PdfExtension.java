@@ -26,7 +26,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
+import javax.jcr.Value;
+import javax.jcr.ValueFormatException;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.sling.jcr.api.SlingRepository;
 import org.slf4j.Logger;
@@ -178,6 +181,19 @@ public class PdfExtension extends SlingAllMethodsServlet {
         Node node = session.getRootNode().getNode(resource.getPath().substring(1));
         String title = node.getProperty("title").getString();
         String text = node.getProperty("text").getString();
+        Value[] tagValues=null;
+        try{
+            tagValues=node.getProperty("tag").getValues();
+        }
+        catch(PathNotFoundException pnfe) {
+            log.info("No tag found for this entry");
+        }
+        catch(ValueFormatException vfe) {
+            //Single property found
+            Value tagValue=node.getProperty("tag").getValue();
+            tagValues=new Value[1];
+            tagValues[0]=tagValue;
+        }
 
         resp.setContentType("text/plain");
         resp.setCharacterEncoding(ENCODING);
@@ -193,6 +209,16 @@ public class PdfExtension extends SlingAllMethodsServlet {
         StyleSheet st = new StyleSheet();
         st.loadTagStyle("body", "leading", "16,0");
         document.add(new Paragraph("Title:" + title + "\n\n"));
+        if (tagValues==null)
+            document.add(new Paragraph("Tags: No tags for this entry\n\n"));
+        else {
+            StringBuffer tags=new StringBuffer();
+            for(int i=0;i<tagValues.length;i++)
+                tags.append(" ").append(tagValues[i].getString()).append(" ");
+
+            document.add(new Paragraph("Tags: "+tags.toString()+"\n\n"));
+        }
+
 
         ArrayList p = HTMLWorker.parseToList(
                 new InputStreamReader(new ByteArrayInputStream(text.getBytes())), st);
