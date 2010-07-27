@@ -63,6 +63,7 @@
             	controls:$('#cntrl').html(),
                 collapseSpeed:1000
             });
+            
             $('#button').click(function() {
                 var title = $("#title").val();
 		var text = $("#editor1").val();

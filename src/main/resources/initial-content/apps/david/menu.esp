@@ -21,7 +21,7 @@
                 <script language="javascript">
                     var info = Sling.getSessionInfo();
                     if (info.userID=="anonymous")
-                        document.getElementById("username").innerHTML = info.userID+" <a href='/system/sling/login'>Login</a>";
+                        document.getElementById("username").innerHTML = info.userID+" <a href='/system/sling/form/login?resource=/content/david.home'>Login</a>";
                     else
                         document.getElementById("username").innerHTML = info.userID;
                 </script>
