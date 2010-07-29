@@ -2,7 +2,7 @@
 		<h3>David Mini CMS based on Apache Sling</h3>
                 <table>
                     <tr>
-                        <td width="33%"><img src='/apps/david/images/logo.png'/></td>
+                        <td width="33%"><img src='/apps/david-libraries/images/logo.png'/></td>
                         <td width="33%">
                             <div align="center">
                                     <ul class="lavaLampNoImage" id="menu">
