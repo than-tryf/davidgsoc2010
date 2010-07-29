@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="/apps/david/lava.css" type="text/css" media="screen">
+<link rel="stylesheet" href="/apps/david-libraries/lava.css" type="text/css" media="screen">
 <script type="text/javascript" src="/system/sling.js"></script>
-<script type="text/javascript" src="/apps/david/jquery.js"></script>
-<script type="text/javascript" src="/apps/david/jquery.lavalamp.js"></script>
-<script type="text/javascript" src="/apps/david/jquery.easing.js"></script>
+<script type="text/javascript" src="/apps/david-libraries/jquery.js"></script>
+<script type="text/javascript" src="/apps/david-libraries/jquery.lavalamp.js"></script>
+<script type="text/javascript" src="/apps/david-libraries/jquery.easing.js"></script>
         <script type="text/javascript">
         $(function() {
             $("#menu").lavaLamp({
@@ -12,17 +12,17 @@
         });
 </script>
 
-<script type="text/javascript" src="/apps/david/jquery-ui-1.8.custom.min.js"></script>
-<link type="text/css" href="/apps/david/jquery-ui-1.8.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/apps/david-libraries/jquery-ui-1.8.custom.min.js"></script>
+<link type="text/css" href="/apps/david-libraries/jquery-ui-1.8.custom.css" rel="stylesheet" />
 
-<script type="text/javascript" src="/apps/david/ui.panel.min.js"></script>
-<link type="text/css" href="/apps/david/ui.panel.css" rel="stylesheet" />
+<script type="text/javascript" src="/apps/david-libraries/ui.panel.min.js"></script>
+<link type="text/css" href="/apps/david-libraries/ui.panel.css" rel="stylesheet" />
 
-<script type="text/javascript" src="/apps/david/jquery.cookie.js"></script>
+<script type="text/javascript" src="/apps/david-libraries/jquery.cookie.js"></script>
 	
-<script type="text/javascript" src="/apps/david/ckeditor/ckeditor.js"></script>
-<script src="/apps/david/ckeditor/_samples/sample.js" type="text/javascript"></script>
-<link href="/apps/david/ckeditor/_samples/sample.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/apps/david-libraries/ckeditor/ckeditor.js"></script>
+<script src="/apps/david-libraries/ckeditor/_samples/sample.js" type="text/javascript"></script>
+<link href="/apps/david-libraries/ckeditor/_samples/sample.css" rel="stylesheet" type="text/css" />
 
 <style>
 	html, body{

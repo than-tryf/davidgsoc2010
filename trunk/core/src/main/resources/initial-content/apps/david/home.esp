@@ -6,7 +6,7 @@
 <%
 load("header.esp");
 %>
-<script type="text/javascript" src="/apps/david/swfobject.js"></script>
+<script type="text/javascript" src="/apps/david-libraries/swfobject.js"></script>
 <style type="text/css">
     body { background-color: #eee; padding: 20px; }
 </style>
@@ -22,7 +22,7 @@ load("header.esp");
 			<div id="flashcontent" align="center">
 
                         <script type="text/javascript">
-                            var so = new SWFObject("/apps/david/tagcloud.swf", "tagcloud", "600", "400", "7", "#ffffff");
+                            var so = new SWFObject("/apps/david-libraries/tagcloud.swf", "tagcloud", "600", "400", "7", "#ffffff");
                             so.addParam("wmode", "transparent");
                             so.addVariable("tcolor", "0x333333");
                             so.addVariable("tcolor2", "0x009900");
