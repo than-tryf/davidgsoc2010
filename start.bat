@@ -1,1 +1,0 @@
-mvn -P autoInstallBundle clean install -Dsling.url=http://localhost:8080/system/console
