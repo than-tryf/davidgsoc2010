@@ -1,7 +1,7 @@
 
 <%    
    var queryManager = currentNode.getSession().getWorkspace().getQueryManager();  
-   var query = queryManager.createQuery("/jcr:root/content/david/element(*, nt:unstructured) order by @created descending", "xpath");
+   var query = queryManager.createQuery("/jcr:root/content/david/*/*/*/element(*, nt:unstructured) order by @created descending", "xpath");
    var result = query.execute().getNodes();
 %>
 <html>
