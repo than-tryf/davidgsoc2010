@@ -36,7 +36,7 @@
                     <instructions>
                         <!-- initial content to be loaded on bundle installation -->
                         <Sling-Initial-Content>
-                            initial-content;overwrite:=true;uninstall:=false
+                            initial-content;overwrite:=true;uninstall:=true
                         </Sling-Initial-Content>
                     </instructions>
                 </configuration>
