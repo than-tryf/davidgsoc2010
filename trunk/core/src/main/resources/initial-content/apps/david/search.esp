@@ -17,22 +17,40 @@ load("header.esp");
 			<h3>Search panel</h3>
 			<div>
                                 <%
-                                if((request.getParameter('qtitle'))||(request.getParameter('qtext'))||(request.getParameter('qtag'))) {
+                                if((request.getParameter('qtitle'))||(request.getParameter('qtext'))) {
                                     var queryManager = currentNode.getSession().getWorkspace().getQueryManager();
                                     if (request.getParameter('qtitle'))
                                         var query = queryManager.createQuery("/jcr:root/content/david/*/*/*/element(*, nt:unstructured)[jcr:like(@title, '%"+request.getParameter("qtitle")+"%')] order by @created descending", "xpath");
                                     else if (request.getParameter('qtext'))
                                         var query = queryManager.createQuery("/jcr:root/content/david/*/*/*/element(*, nt:unstructured)[jcr:like(@text, '%"+request.getParameter("qtext")+"%')] order by @created descending", "xpath");
-                                    else {
-                                        var query = queryManager.createQuery("/jcr:root/content/tags/element(*, nt:unstructured)[jcr:like(@name, '%"+request.getParameter("qtag")+"%')] order by @created descending", "xpath");
-                                    }
+                                    
                                     var result = query.execute().getNodes();
                                     while(result.hasNext()) {
                                         post = result.nextNode();
                                         %>
                                         <h3><a href="<%= post.getPath() %>.view"><%=post.title%></a></h3>
                                     <%}
-                                } else {%>
+                                }
+                                else if (request.getParameter('qtag')) {
+                                    var queryManager = currentNode.getSession().getWorkspace().getQueryManager();
+                                    var searchString =  "/jcr:root/content/tags//element(*,nt:unstructured)[fn:name()= '"+request.getParameter("qtag")+"'] order by @created descending";
+                                    var query = queryManager.createQuery(searchString, "xpath");
+                                    var result = query.execute().getNodes();
+                                    var session = currentNode.getSession();
+                                    if (result.hasNext()) {
+                                        var uuids=result.nextNode().getProperty("UUIDs").getValues();
+                                        for(var i =0; i<uuids.length; i++) {
+                                            var uuid=uuids[i];
+                                            var nodeR=session.getNodeByUUID(uuid.getString());
+                                            %>
+
+                                            <a href='<%=nodeR.getPath() %>.view'><%=nodeR.title%></a><br>
+
+                                            <%
+                                        }
+                                    }
+                                }
+                                else {%>
 
                                     <br/>
                                     <br/>
