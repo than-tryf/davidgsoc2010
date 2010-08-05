@@ -79,7 +79,6 @@ public class CloudExtension extends SlingAllMethodsServlet {
     private void createTagCloud(SlingHttpServletRequest req, SlingHttpServletResponse resp) throws IOException, RepositoryException {
         log.info("createTagCloud()");
 
-        String xml = "<tags><a href='http://www.roytanck.com' style='22' color='0xff0000' hicolor='0x00cc00'>WordPress</a><a href='http://www.roytanck.com' style='12'>Flash</a><a href='http://www.roytanck.com' style='16'>Plugin</a><a href='http://www.roytanck.com' style='14'>WP-Cumulus</a><a href='http://www.roytanck.com' style='12'>3D</a><a href='http://www.roytanck.com' style='12'>Tag cloud</a><a href='http://www.roytanck.com' style='9'>Roy Tanck</a><a href='http://www.roytanck.com' style='10'>SWFObject</a><a href='http://www.roytanck.com' style='10'>Example</a><a href='http://www.roytanck.com' style='12'>Click</a><a href='http://www.roytanck.com' style='12'>Animation</a></tags>";
         resp.setContentType("text/plain");
         resp.setCharacterEncoding(ENCODING);
         PrintWriter writer = resp.getWriter();
