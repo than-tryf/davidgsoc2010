@@ -27,6 +27,9 @@ public class SendTask implements Job {
     private final String TAG_PATH = "/content/tags";
     private final String DAVID_ROOT = "/content/david";
 
+    public SendTask() {
+    }
+
     public SendTask(javax.jcr.Session session) {
         this.session=session;
     }
@@ -49,8 +52,8 @@ public class SendTask implements Job {
         InternetAddress toAddress = null;
         ClassLoader bakCL = Thread.currentThread().getContextClassLoader();
         try {
-            fromAddress = new InternetAddress(from);
-            toAddress = new InternetAddress(to);
+            fromAddress = new InternetAddress(getFrom());
+            toAddress = new InternetAddress(getTo());
         } catch (AddressException e) {
             log.error(e.toString());
         }
@@ -58,7 +61,7 @@ public class SendTask implements Job {
         try {
             simpleMessage.setFrom(fromAddress);
             simpleMessage.setRecipient(RecipientType.TO, toAddress);
-            simpleMessage.setSubject(subject);
+            simpleMessage.setSubject(getSubject());
             simpleMessage.setText(info);
             //Workaround for using javax.mail bundle
             //see http://www.mail-archive.com/user@geronimo.apache.org/msg14511.html
@@ -101,5 +104,29 @@ public class SendTask implements Job {
         } finally {
             return info.toString();
         }
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 }

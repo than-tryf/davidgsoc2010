@@ -10,6 +10,7 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.sling.commons.scheduler.Scheduler;
 import org.apache.sling.commons.scheduler.Job;
 import org.apache.sling.jcr.api.SlingRepository;
+import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,8 @@ public class JobScheduler {
 
     protected void activate(ComponentContext componentContext) throws Exception {
         log.info("activate");
+        BundleContext bc=componentContext.getBundleContext();
+        log.info(bc.getProperty("hello"));
         try {
             /* TODO
              * Change this behaviour
