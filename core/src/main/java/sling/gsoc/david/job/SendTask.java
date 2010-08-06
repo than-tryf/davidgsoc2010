@@ -20,23 +20,37 @@ import org.slf4j.LoggerFactory;
 public class SendTask implements Job {
 
     private static final Logger log = LoggerFactory.getLogger(SendTask.class);
-    private String from = "david@gsoc";
-    private String to = "admin@david";
-    private String subject = "David Mini CMS - Report";
+    
+    private String from;
+    private String to;
+    private String subject;
+    private String text;
     private javax.jcr.Session session;
     private final String TAG_PATH = "/content/tags";
     private final String DAVID_ROOT = "/content/david";
+    private boolean useText;
 
     public SendTask() {
+        this.useText=true;
     }
 
     public SendTask(javax.jcr.Session session) {
         this.session=session;
+        this.useText=false;
     }
 
     public void execute(JobContext jc) {
         log.info("execute");
-        String info=retrieveRepositoryInformation();
+        String info=null;
+        
+        //Different use of the SendTask job
+        //useText true means this Job was scheduled by an EmailOperation
+        //useText false means this Job was scheduler by the JobScheduler
+        if (useText)
+            info = getText();
+        else
+            info = retrieveRepositoryInformation();
+
         sendMail(info);
     }
 
@@ -63,6 +77,7 @@ public class SendTask implements Job {
             simpleMessage.setRecipient(RecipientType.TO, toAddress);
             simpleMessage.setSubject(getSubject());
             simpleMessage.setText(info);
+            
             //Workaround for using javax.mail bundle
             //see http://www.mail-archive.com/user@geronimo.apache.org/msg14511.html
             Thread.currentThread().setContextClassLoader(null);
@@ -128,5 +143,19 @@ public class SendTask implements Job {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    /**
+     * @return the text
+     */
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * @param text the text to set
+     */
+    public void setText(String text) {
+        this.text = text;
     }
 }

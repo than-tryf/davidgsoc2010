@@ -11,7 +11,7 @@ function checkAuth() {
     var info = Sling.getSessionInfo();
     if (info.userID=="anonymous") {
         alert("You must login to post content");
-        window.location = "/content/david.home";
+        window.location = "/content/david.html";
     }
 }
 </script>
