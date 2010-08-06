@@ -8,7 +8,7 @@
 
   * Autenthicate with admin user in your Apache Sling instance (this is only because actually the authentication isn't implemented)
 
-  * Start your browser at http://localhost:8080/content/david.home
+  * Start your browser at http://localhost:8080/content/david.html
 
 
     
