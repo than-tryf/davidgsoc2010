@@ -63,7 +63,7 @@ load("header.esp");
 			        	post = result.nextNode()
 			        %> 
 
-						<h3><%=post.title%> - <a href="<%= post.getPath() %>.article">READ</a> - <a href="<%= post.getPath() %>.edit">EDIT</a> - <a id="<%= post.getPath() %>" class="delete" href="#">DELETE</a> - <a href="<%= post.getPath() %>.pdf"><img alt="Get pdf" src="/libraries/images/pdf-icon.png"></a></h3>
+						<h3> <a href="<%= post.getPath() %>.article"><%=post.title%></a> - <a href="<%= post.getPath() %>.edit">EDIT</a> - <a id="<%= post.getPath() %>" class="delete" href="#">DELETE</a> - <a href="<%= post.getPath() %>.pdf"><img alt="Get pdf" src="/libraries/images/pdf-icon.png"></a></h3>
 					<%
 					}
 				%>	

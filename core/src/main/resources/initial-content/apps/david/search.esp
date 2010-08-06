@@ -28,7 +28,7 @@ load("header.esp");
                                     while(result.hasNext()) {
                                         post = result.nextNode();
                                         %>
-                                        <h3><a href="<%= post.getPath() %>.view"><%=post.title%></a></h3>
+                                        <h3><a href="<%= post.getPath() %>.article"><%=post.title%></a></h3>
                                     <%}
                                 }
                                 else if (request.getParameter('qtag')) {
@@ -44,7 +44,7 @@ load("header.esp");
                                             var nodeR=session.getNodeByUUID(uuid.getString());
                                             %>
 
-                                            <a href='<%=nodeR.getPath() %>.view'><%=nodeR.title%></a><br>
+                                            <a href='<%=nodeR.getPath() %>.article'><%=nodeR.title%></a><br>
 
                                             <%
                                         }
