@@ -28,7 +28,7 @@ load("header.esp");
                             var nodeR=session.getNodeByUUID(uuid.getString());
                             %>
 
-                            <a href='<%=nodeR.getPath() %>.view'><%=nodeR.title%></a><br>
+                            <a href='<%=nodeR.getPath() %>.article'><%=nodeR.title%></a><br>
 
                             <%
                         }

@@ -30,7 +30,7 @@ function checkAuth() {
 				<textarea cols="80" id="editor1" name="editor1" rows="10">
 				Your text...
 				</textarea>
-                                Tags:<br/><textarea cols="80" id="tags" name="tags" rows="1">tags</textarea><br/><br/>
+                                Tags (separated by comma):<br/><textarea cols="80" id="tags" name="tags" rows="1">tags</textarea><br/><br/>
 				<script type="text/javascript">
 				//<![CDATA[
 	
