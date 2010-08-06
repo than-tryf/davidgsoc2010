@@ -106,7 +106,7 @@
                     data: data,
                     success: function(msg){
                         alert("Entry saved");
-                        window.location = "/content/david.home";
+                        window.location = "/content/david.html";
                     },
                     error: function(msg){
                         alert(msg);
@@ -125,7 +125,7 @@
                     data: "title="+title+"&text="+text+"&sling:resourceType=david&jcr:mixinTypes=mix:referenceable",
                     success: function(msg){
                         alert("Entry saved");
-                        window.location = "/content/david.home";
+                        window.location = "/content/david.html";
                     },
                     error: function(msg){
                         alert(msg);

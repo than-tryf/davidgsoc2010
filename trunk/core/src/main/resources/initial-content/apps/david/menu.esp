@@ -6,9 +6,9 @@
                         <td width="33%">
                             <div align="center">
                                     <ul class="lavaLampNoImage" id="menu">
-                                        <li><a href="/content/david.home">Home</a></li>
+                                        <li><a href="/content/david.html">Home</a></li>
                                         <li><a href="/content/david.new">New entry</a></li>
-                                        <li><a href="/content/david.list.html">List entry</a></li>
+                                        <li><a href="/content/david.list">List entry</a></li>
                                         <li><a class="search" href="/content/david.search">Search entry</a></li>
                                     </ul>
                             </div>
@@ -21,7 +21,7 @@
                 <script language="javascript">
                     var info = Sling.getSessionInfo();
                     if (info.userID=="anonymous")
-                        document.getElementById("username").innerHTML = info.userID+" <a href='/system/sling/form/login?resource=/content/david.home'>Login</a>";
+                        document.getElementById("username").innerHTML = info.userID+" <a href='/system/sling/form/login?resource=/content/david.html'>Login</a>";
                     else
                         document.getElementById("username").innerHTML = info.userID;
                 </script>
