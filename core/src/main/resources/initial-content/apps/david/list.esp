@@ -14,7 +14,7 @@ load("header.esp");
   jQuery(document).ready(function() {
     $("a.delete").click(function () { 
    		var id=$(this).attr("id");
-                var $dialog = $('<div></div>').html('This dialog will show every time!').dialog({
+                var $dialog = $('<div></div>').html('Are you sure to delete this item?').dialog({
                     bgiframe: true,
                     autoOpen: false,
                     height: 100,
@@ -43,11 +43,14 @@ load("header.esp");
                 });
                 $dialog.dialog('open');
    		return false;
-	}); 
+	});
+    
   });
 </script>
 <body>
-    
+
+
+
 <div id="lCenter">
        
 	<div id="desktop">
@@ -63,7 +66,7 @@ load("header.esp");
 			        	post = result.nextNode()
 			        %> 
 
-						<h3> <a href="<%= post.getPath() %>.article"><%=post.title%></a> - <a href="<%= post.getPath() %>.edit">EDIT</a> - <a id="<%= post.getPath() %>" class="delete" href="#">DELETE</a> - <a href="<%= post.getPath() %>.pdf"><img alt="Get pdf" src="/libraries/images/pdf-icon.png"></a></h3>
+						<h3> <a href="<%= post.getPath() %>.article"><%=post.title%></a> - <a href="<%= post.getPath() %>.edit">EDIT</a> - <a id="<%= post.getPath() %>" class="delete" href="#">DELETE</a> - <a href="<%= post.getPath() %>.pdf"><img alt="Get pdf" src="/libs/images/pdf-icon.png"></a></h3>
 					<%
 					}
 				%>	

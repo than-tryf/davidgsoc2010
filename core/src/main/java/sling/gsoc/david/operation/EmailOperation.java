@@ -36,6 +36,9 @@ public class EmailOperation implements SlingPostOperation{
     @Property(value = "text")
     static final String TEXT = "notify.email.text";
 
+    @Property(value = "http://localhost:8080")
+    static final String HOST = "notify.email.host";
+
     @Reference
     private Scheduler scheduler;
 
@@ -55,7 +58,7 @@ public class EmailOperation implements SlingPostOperation{
             task.setFrom(request.getParameter(FROM));
             task.setTo(request.getParameter(TO));
             task.setSubject(request.getParameter(SUBJECT));
-            task.setText(request.getParameter(TEXT));
+            task.setText("Read this article: "+HOST+request.getParameter(TEXT));
             String jobName = "EmailOperation";
 
             final long delay = 10 * 1000;
