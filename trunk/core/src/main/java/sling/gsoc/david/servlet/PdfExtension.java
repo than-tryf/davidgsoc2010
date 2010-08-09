@@ -156,7 +156,7 @@ public class PdfExtension extends SlingAllMethodsServlet {
             title = tempNode.getProperty("title").getString();
             path = tempNode.getPath();
             tempBuffer = new StringBuffer("");
-            tempBuffer.append(i+" - ");
+            tempBuffer.append(i).append(" - ");
             tempBuffer.append(title);
             tempBuffer.append(" - ");
             tempBuffer.append(SERVER_URL).append(path);
@@ -216,7 +216,7 @@ public class PdfExtension extends SlingAllMethodsServlet {
         if (tagValues==null)
             document.add(new Paragraph("Tags: No tags for this entry\n\n"));
         else {
-            StringBuffer tags=new StringBuffer();
+            StringBuilder tags=new StringBuilder();
             for(int i=0;i<tagValues.length;i++)
                 tags.append(" ").append(tagValues[i].getString()).append(" ");
 
