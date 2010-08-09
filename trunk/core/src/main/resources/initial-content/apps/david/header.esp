@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="/libraries/lava.css" type="text/css" media="screen">
+<link rel="stylesheet" href="/libs/lava.css" type="text/css" media="screen">
 <script type="text/javascript" src="/system/sling.js"></script>
-<script type="text/javascript" src="/libraries/jquery.js"></script>
-<script type="text/javascript" src="/libraries/jquery.lavalamp.js"></script>
-<script type="text/javascript" src="/libraries/jquery.easing.js"></script>
+<script type="text/javascript" src="/libs/jquery.js"></script>
+<script type="text/javascript" src="/libs/jquery.lavalamp.js"></script>
+<script type="text/javascript" src="/libs/jquery.easing.js"></script>
         <script type="text/javascript">
         $(function() {
             $("#menu").lavaLamp({
@@ -12,17 +12,17 @@
         });
 </script>
 
-<script type="text/javascript" src="/libraries/jquery-ui-1.8.custom.min.js"></script>
-<link type="text/css" href="/libraries/jquery-ui-1.8.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="/libs/jquery-ui-1.8.custom.min.js"></script>
+<link type="text/css" href="/libs/jquery-ui-1.8.custom.css" rel="stylesheet" />
 
-<script type="text/javascript" src="/libraries/ui.panel.min.js"></script>
-<link type="text/css" href="/libraries/ui.panel.css" rel="stylesheet" />
+<script type="text/javascript" src="/libs/ui.panel.min.js"></script>
+<link type="text/css" href="/libs/ui.panel.css" rel="stylesheet" />
 
-<script type="text/javascript" src="/libraries/jquery.cookie.js"></script>
+<script type="text/javascript" src="/libs/jquery.cookie.js"></script>
 	
-<script type="text/javascript" src="/libraries/ckeditor/ckeditor.js"></script>
-<script src="/libraries/ckeditor/_samples/sample.js" type="text/javascript"></script>
-<link href="/libraries/ckeditor/_samples/sample.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/libs/ckeditor/ckeditor.js"></script>
+<script src="/libs/ckeditor/_samples/sample.js" type="text/javascript"></script>
+<link href="/libs/ckeditor/_samples/sample.css" rel="stylesheet" type="text/css" />
 
 <style>
 	html, body{
@@ -34,6 +34,7 @@
 	.box { margin: 1em }
 	.navPanel { margin: 0 0.5em 0.5em 0.5em; }
             .centralPanel { margin-bottom: 1em; }
+            .centralPanel2 { margin-bottom: 1em; }
             .fakeLink{ color:navy; cursor:pointer; }
 	#desktop { background-color:#eee; padding:1.5em; padding-bottom:3em; color:#444; }
 	#container{
@@ -53,6 +54,16 @@
 </style>
 
 <script type="text/javascript">
+function checkAuth() {
+    var info = Sling.getSessionInfo();
+    if (info.userID=="anonymous") {
+        alert("You must login to post content");
+        window.location = "/content/david.html";
+    }
+}
+</script>
+
+<script type="text/javascript">
     $(document).ready(
 	function(){
 	    $('#panelCenter_1').panel({
@@ -60,6 +71,11 @@
             });
 					
             $('#contentPanel').panel({
+            	controls:$('#cntrl').html(),
+                collapseSpeed:1000
+            });
+
+            $('#contentPanel_2').panel({
             	controls:$('#cntrl').html(),
                 collapseSpeed:1000
             });
@@ -109,7 +125,7 @@
                         window.location = "/content/david.html";
                     },
                     error: function(msg){
-                        alert(msg);
+                        alert("Error during save");
                     }
  		});
             });
@@ -128,7 +144,7 @@
                         window.location = "/content/david.html";
                     },
                     error: function(msg){
-                        alert(msg);
+                        alert("Error during update");
                     }
  		});
             });

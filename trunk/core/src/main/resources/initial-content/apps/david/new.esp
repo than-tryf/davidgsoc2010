@@ -6,15 +6,7 @@
 <%
 load("header.esp");
 %>
-<script type="text/javascript">
-function checkAuth() {
-    var info = Sling.getSessionInfo();
-    if (info.userID=="anonymous") {
-        alert("You must login to post content");
-        window.location = "/content/david.html";
-    }
-}
-</script>
+
 </head>
 <body onload="checkAuth()">
 <div id="lCenter">

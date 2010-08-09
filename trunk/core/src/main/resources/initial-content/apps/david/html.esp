@@ -6,7 +6,7 @@
 <%
 load("header.esp");
 %>
-<script type="text/javascript" src="/libraries/swfobject.js"></script>
+<script type="text/javascript" src="/libs/swfobject.js"></script>
 <style type="text/css">
     body { background-color: #eee; padding: 20px; }
 </style>
@@ -17,24 +17,48 @@ load("header.esp");
 		<%
 		load("menu.esp");
 		%>
-                <div id="contentPanel" class="centralPanel">
-			<h3>Tag cloud</h3>
-			<div id="flashcontent" align="center">
+                <div style="width:49%;float:left;">
+                    <div id="contentPanel" class="centralPanel">
+                            <h3>Tag cloud</h3>
+                            <div id="flashcontent" align="center">
 
-                        <script type="text/javascript">
-                            var so = new SWFObject("/libraries/tagcloud.swf", "tagcloud", "600", "400", "7", "#ffffff");
-                            so.addParam("wmode", "transparent");
-                            so.addVariable("tcolor", "0x333333");
-                            so.addVariable("tcolor2", "0x009900");
-                            so.addVariable("hicolor", "0x000000");
-                            so.addVariable("tspeed", "100");
-                            so.addVariable("distr", "true");
-                            so.addVariable("xmlpath", "/content/tag.cloud");
-                            so.write("flashcontent");
-                        </script>
+                            <script type="text/javascript">
+                                var so = new SWFObject("/libs/tagcloud.swf", "tagcloud", "600", "400", "7", "#ffffff");
+                                so.addParam("wmode", "transparent");
+                                so.addVariable("tcolor", "0x333333");
+                                so.addVariable("tcolor2", "0x009900");
+                                so.addVariable("hicolor", "0x000000");
+                                so.addVariable("tspeed", "100");
+                                so.addVariable("distr", "true");
+                                so.addVariable("xmlpath", "/content/tag.cloud");
+                                so.write("flashcontent");
+                            </script>
 
-			</div>
-		 </div>
+                            </div>
+                     </div>
+                 </div>
+                  <div style="width:49%;float:right;">
+                        <div id="contentPanel_2" class="centralPanel">
+                                <h3>Latest articles</h3>
+                                <div id="latestArticles" align="center">
+
+                                <%
+                                var queryManager = currentNode.getSession().getWorkspace().getQueryManager();
+                                var query = queryManager.createQuery("/jcr:root/content/david/*/*/*/element(*, nt:unstructured) order by @created ascending", "xpath");
+                                var result = query.execute().getNodes();
+
+			        while(result.hasNext()) {
+			        	post = result.nextNode()
+			        %>
+                                        <a href="<%= post.getPath() %>.article"><%=post.title%></a><br/>
+					<%
+					}
+				%>
+
+
+                                </div>
+                         </div>
+                  </div>
 	</div>
 </div>
 
