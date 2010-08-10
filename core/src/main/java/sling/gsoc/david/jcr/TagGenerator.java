@@ -70,17 +70,10 @@ public class TagGenerator implements EventListener {
         while (events.hasNext()) {
             Event event = events.nextEvent();
             try {
-                if (event.getType() == Event.NODE_ADDED) {
-                    log.info("new upload: {}", event.getPath());
-                    Node addedNode = session.getRootNode().getNode(event.getPath().substring(1));
-                    processAddedNode(addedNode);
-                    log.info("finished processing of {}", event.getPath());
-                } else if (event.getType() == Event.NODE_REMOVED) {
-                    log.info("deleted node: {}", event.getPath());
-                    Node deletedNode = session.getRootNode().getNode(event.getPath().substring(1));
-                    processDeletedNode(deletedNode);
-                    log.info("finished processing of {}", event.getPath());
-                }
+                log.info("new upload: {}", event.getPath());
+                Node addedNode = session.getRootNode().getNode(event.getPath().substring(1));
+                processAddedNode(addedNode);
+                log.info("finished processing of {}", event.getPath());
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }
@@ -88,6 +81,7 @@ public class TagGenerator implements EventListener {
     }
 
     private void processAddedNode(Node addedNode) throws RepositoryException {
+        log.info("processAddedNode");
         Value[] tagValues=null;
         try{
             tagValues=addedNode.getProperty("tag").getValues();
@@ -151,7 +145,5 @@ public class TagGenerator implements EventListener {
 
     }
 
-    private void processDeletedNode(Node deletedNode) {
-
-    }
+    
 }

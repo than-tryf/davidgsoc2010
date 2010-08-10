@@ -25,6 +25,19 @@ load("header.esp");
                                 $.ajax({
    					type: "POST",
    					url: id,
+   					data: ":operation=deletetag",
+   					success: function(msg){
+                                            $(this).dialog('close');
+                                            location.reload();
+   					},
+                                        error: function(msg){
+                                            alert(msg);
+                                            $(this).dialog('close');
+                                        }
+ 				});
+                                $.ajax({
+   					type: "POST",
+   					url: id,
    					data: ":operation=delete",
    					success: function(msg){
                                             $(this).dialog('close');
