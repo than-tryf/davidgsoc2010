@@ -79,14 +79,19 @@ function checkAuth() {
             	controls:$('#cntrl').html(),
                 collapseSpeed:1000
             });
-            
+
+            //Function called when there is a click of the
+            //submit button in new.esp page
             $('#button').click(function() {
+
+                //Retrieve the input texts from the HTML
                 var title = $("#title").val();
 		var text = $("#editor1").val();
                 var editor_data = CKEDITOR.instances.editor1.getData();
                 text=editor_data;
                 var tagValues = $("#tags").val();
-                
+
+                //Now create a list with tags
                 tagValues=tagValues.split(",");
 
                 for(var i=0; i<tagValues.length; i++) {
@@ -98,12 +103,17 @@ function checkAuth() {
                     if(tagValues[i] != "")
                         token.push(tagValues[i]);
 
+                //Every information is stored in the "data" variable
+                //sling:resourceType tells the repository that this entry is a David one
+                //jcr:mixinTypes=mix:referenceable defines this entry as referenceable (see JCR)
                 var data="title="+title+"&text="+text+"&sling:resourceType=david&jcr:mixinTypes=mix:referenceable";
 
                 for (var j = 0 ; j < token.length ; j++){
                     data=data.concat("&tag="+token[j]);
                 }
 
+                //The current date will be used to create the folders
+                //in the Sling repository where we will put the content
                 var currentDate = new Date();
                 var year = currentDate.getYear()+1900;
                 var month = currentDate.getMonth()+1;
@@ -114,8 +124,11 @@ function checkAuth() {
                 if (day<10)
                     day = "0" + day;
 
+                //The url of new content will be under the David root node /content/david
+                //created during the initial content loading
                 var url="/content/david/"+year+"/"+month+"/"+day+"/";
 
+                //Simple AJAX call to create a HTTP POST request
 		$.ajax({
                     type: "POST",
                     url: url,
