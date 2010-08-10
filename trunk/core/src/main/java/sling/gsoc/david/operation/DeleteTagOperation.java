@@ -1,9 +1,7 @@
 package sling.gsoc.david.operation;
 
-import java.util.logging.Level;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
-import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
@@ -30,11 +28,9 @@ public class DeleteTagOperation implements SlingPostOperation{
     @Property(value = "deletetag")
     static final String OPERATION = "sling.post.operation";
     private Session session;
-    private ObservationManager observationManager;
     @Reference
     private SlingRepository repository;
 
-    private final String CONTENT_PATH = "/content/david";
     private final String TAG_PATH="/content/tags";
     
     private static final Logger log = LoggerFactory.getLogger(DeleteTagOperation.class);

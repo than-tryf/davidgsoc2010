@@ -1,9 +1,6 @@
 package sling.gsoc.david.jcr;
 
-import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Calendar;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Repository;
@@ -19,7 +16,6 @@ import javax.jcr.observation.ObservationManager;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
-import org.apache.jackrabbit.value.ValueFactoryImpl;
 import org.apache.sling.jcr.api.SlingRepository;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
