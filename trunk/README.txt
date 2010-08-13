@@ -9,5 +9,9 @@ Full documentation available at https://cwiki.apache.org/confluence/display/SLIN
 
 INSTALLATION 
 
-todo
+1) Make sure your Apache Sling is started
+2) Launch the next maven command on the two project "core" and "libraries"
 
+mvn -P autoInstallBundle clean install -Dsling.url=http://localhost:8080/system/console
+ 
+3) Browse David at http://localhost:8080/content/david.html
