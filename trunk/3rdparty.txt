@@ -1,0 +1,7 @@
+David Mini CMS - 3rd party libraries licenses
+jQuery  1.4.2 : http://jquery.org/license 
+jQueryUI  1.8 : http://jquery.org/license
+LavaLamp : Dual licensed under the MIT and GPL licenses - http://www.gmarwaha.com/blog/2007/08/23/lavalamp-for-jquery-lovers/
+WP-Cumulus SWF : GPL v3 license - http://wordpress.org/extend/plugins/wp-cumulus/
+iText :  AGPL v3 license - http://itextpdf.com/terms-of-use/index.php
+CKEditor : GPL, LGPL and MPL
