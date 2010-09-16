@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>authentication</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>64aee675-4d4c-42d8-a3aa-ad0124dd0e8a</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>authentication</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Authentication</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Authentication</title> </head> <body>
+		 
+<p>You can submit new entry only if you have already authenticated with Sling. So you can see that on the <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/menu.esp" class="external-link" rel="nofollow">/apps/david/menu.esp</a> script there is a check for the credentials</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+......
+...
+&lt;td width=<span class="code-quote">"33%"</span> align=<span class="code-quote">"right"</span>&gt;
+	Logged as: &lt;b id=<span class="code-quote">"username"</span>&gt;????&lt;/b&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;script language=<span class="code-quote">"javascript"</span>&gt;
+	<span class="code-keyword">var</span> info = Sling.getSessionInfo();
+	<span class="code-keyword">if</span> (info.userID==<span class="code-quote">"anonymous"</span>)
+		document.getElementById(<span class="code-quote">"username"</span>).innerHTML = 
+			info.userID+<span class="code-quote">"&lt;a href='/system/sling/form/login?resource=/content/david.html'&gt;Login&lt;/a&gt;"</span>;
+	<span class="code-keyword">else</span> 
+		document.getElementById(<span class="code-quote">"username"</span>).innerHTML = info.userID;
+&lt;/script&gt;
+...
+...
+</pre> 
+</div></div> 
+<p>Let's now explain this code. Using the <a href="http://svn.apache.org/repos/asf/sling/trunk/bundles/servlets/post/src/main/resources/system/sling.js" class="external-link" rel="nofollow">sling.js</a>, system utility defined in Sling, we can get the session information object. If the userid of this object is <font color="#3366ff"><b><em>anonymous</em></b></font>&nbsp;we put a link to the authentication form.</p> 
+ 
+<p>Otherwise we simply print the userid.</p> 
+ 
+<p>The authentication form receives a <font color="#3366ff"><b><em>resource</em></b></font>&nbsp;parameter, that is the resource where the user will go after the authentication. This sort of authentication is a basic one, if you want to know more about authentication in Apache Sling you can read <a href="http://sling.apache.org/site/authentication.html" class="external-link" rel="nofollow">the authentication documentation on Sling website</a>.</p> 
+ 
+ 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

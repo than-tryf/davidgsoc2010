@@ -2,6 +2,7 @@ package sling.gsoc.david.servlet;
 
 import com.lowagie.text.Chunk;
 import com.lowagie.text.DocumentException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.jcr.RepositoryException;
 import javax.servlet.ServletOutputStream;
@@ -22,6 +23,8 @@ import com.lowagie.text.html.simpleparser.HTMLWorker;
 import com.lowagie.text.html.simpleparser.StyleSheet;
 import java.awt.Color;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import javax.jcr.Node;
@@ -111,6 +114,7 @@ public class PdfExtension extends SlingAllMethodsServlet {
             // TODO
             // Modify it with something better
             log.error(e.toString());
+            e.printStackTrace();
         }
     }
 
@@ -226,6 +230,8 @@ public class PdfExtension extends SlingAllMethodsServlet {
 
         ArrayList p = HTMLWorker.parseToList(
                 new InputStreamReader(new ByteArrayInputStream(text.getBytes())), st);
+
+        log.info("Elemements of pdf file: "+p.size());
 
         for (int k = 0; k < p.size(); ++k) {
             document.add((Element) p.get(k));

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>overview</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>1d92c006-fad2-4477-b3b6-cb306e3f3769</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value>
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>overview</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Overview (from SLING-1438)</value>
+	</property>
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Overview</title> </head> <body>
+		 <p>
+		 This is a Google Summer of Code 2010, Federico Paparoni has been accepted as a student to work on it, mentored by Bertrand Delacretaz
+		 </p>
+		 <p>
+		The goal is to create a mini-CMS with Sling, that demonstrates Sling best practices.
+		</p>
+
+		<p>See <a href='http://tinyurl.com/asfgsoc'>http://tinyurl.com/asfgsoc</a> for the full list of GSoC 2010 projects at the ASF, and <a href='http://community.apache.org/gsoc'>http://community.apache.org/gsoc</a> for general GSoC information.
+		 </p> 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

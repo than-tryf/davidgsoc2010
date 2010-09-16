@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>listentriesbytags</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>f303a8df-f4c1-47a5-8cc3-c2e652ef88c8</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>taglist</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>List entries by tags</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>List entries by tags</title> </head> <body>
+		<p>When you click on one tag of the previous flash tag cloud, you will land on the page created by <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/taglist.esp" class="external-link" rel="nofollow">/apps/david/taglist.esp</a> script. There using the relationship that there is between a tag and the UUID list of the articles, we have only to execute this simple search to print all the articles with the tag passed as parameter</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+&lt;h3&gt;Entries&lt;/h3&gt;&lt;h3&gt;Entries&lt;/h3&gt;
+	&lt;div&gt;
+        &lt;%
+        <span class="code-keyword">var</span> uuids=tagNode.getProperty(<span class="code-quote">"UUIDs"</span>).getValues();
+        <span class="code-keyword">for</span>(<span class="code-keyword">var</span> i =0; i&lt;uuids.length; i++) {
+        	<span class="code-keyword">var</span> uuid=uuids[i];
+                <span class="code-keyword">var</span> nodeR=session.getNodeByUUID(uuid.getString());
+        %&gt;
+ 
+        	&lt;a href='&lt;%=nodeR.getPath() %&gt;.article'&gt;&lt;%=nodeR.title%&gt;&lt;/a&gt;&lt;br&gt;
+ 
+        &lt;%
+        }
+ 
+        %&gt;
+</pre> 
+</div></div> 
+<p>You can see in this script as ESP language can be used to manage object related to JCR. Using the method getNodeByUUID of <a href="http://www.day.com/maven/jsr170/javadocs/jcr-2.0/javax/jcr/Session.html" class="external-link" rel="nofollow">Session</a>&nbsp;we have the node related to a particular UUID, so we can print it in the list.</p> 
+ 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

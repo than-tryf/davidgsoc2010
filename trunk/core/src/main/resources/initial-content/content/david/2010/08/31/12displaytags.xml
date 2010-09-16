@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>displaytags</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>96d0a061-94bf-4a28-a607-3eb60888a7bf</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>tagcloud</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Display tags using the Flash-based animation</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Display tags using the Flash-based animation</title> </head> <body>
+		<p>The homepage of this CMS is related to the <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/html.esp" class="external-link" rel="nofollow">/apps/david/html.esp</a> script. From the script side, there is only the inclusion of WP-Cumulus, a flash based tag cloud. This engine requires an XML with tags informations and, as you can see in the script, it points to the next url:&nbsp;</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+so.addVariable(<span class="code-quote">"xmlpath"</span>, <span class="code-quote">"/content/tag.cloud"</span>);
+</pre> 
+</div></div> 
+<p>To create this XML there is another registered component, which manages the <font color="#0000ff"><b><em>cloud</em></b></font> resource type. This component is <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/java/sling/gsoc/david/servlet/CloudExtension.java" class="external-link" rel="nofollow">sling.gsoc.david.servlet.CloudExtension</a> , which extends <a href="http://svn.apache.org/repos/asf/sling/trunk/bundles/api/src/main/java/org/apache/sling/api/servlets/SlingAllMethodsServlet.java" class="external-link" rel="nofollow">SlingAllMethodsServlet </a> to manage this new resource type. In the following code of this component you can see how it is used the <a href="http://felix.apache.org/site/apache-felix-maven-scr-plugin.html#ApacheFelixMavenSCRPlugin-Property" class="external-link" rel="nofollow">@Property</a> annotation to configure it</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+...
+...
+@Component(metatype = <span class="code-keyword">false</span>, immediate = <span class="code-keyword">true</span>)
+@Service(value = javax.servlet.Servlet.class)
+<span class="code-keyword">public</span> class CloudExtension <span class="code-keyword">extends</span> SlingAllMethodsServlet {
+ 
+    @Property(value = <span class="code-quote">"PDF Extension Servlet"</span>)
+    <span class="code-keyword">static</span> <span class="code-keyword">final</span> <span class="code-object">String</span> DESCRIPTION = <span class="code-quote">"service.description"</span>;
+    @Property(value = <span class="code-quote">"David Mini CMS"</span>)
+    <span class="code-keyword">static</span> <span class="code-keyword">final</span> <span class="code-object">String</span> VENDOR = <span class="code-quote">"service.vendor"</span>;
+    @Property(value = <span class="code-quote">"sling/servlet/<span class="code-keyword">default</span>"</span>)
+    <span class="code-keyword">static</span> <span class="code-keyword">final</span> <span class="code-object">String</span> RESOURCE_TYPES = <span class="code-quote">"sling.servlet.resourceTypes"</span>;
+    @Property(value = <span class="code-quote">"cloud"</span>)
+    <span class="code-keyword">static</span> <span class="code-keyword">final</span> <span class="code-object">String</span> EXTENSIONS = <span class="code-quote">"sling.servlet.extensions"</span>;
+...
+...
+</pre> 
+</div></div> 
+<p>This component scans the tag structure and creates the XML. The final result is showed in the next image</p> 
+ 
+<p><span class="image-wrap" style=""><img src="http://localhost:8080/libs/images/tag.png" style="border: 0px solid black" /></span></p> 
+ 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

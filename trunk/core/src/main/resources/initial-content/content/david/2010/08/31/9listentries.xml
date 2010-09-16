@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>listentries</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>b90d733f-96a7-4a51-84c8-700357de5ae1</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>list</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>List existing entries</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>List existing entries</title> </head> <body>
+
+<p>Once you saved some entries in David, you can see a complete list of articles using the script <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/list.esp" class="external-link" rel="nofollow">/apps/david/list.esp</a>.</p> 
+ 
+<p>Firstly there is a JCR query to find all the items</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+<span class="code-keyword">var</span> queryManager = currentNode.getSession().getWorkspace().getQueryManager();  
+<span class="code-keyword">var</span> query = queryManager.createQuery(<span class="code-quote">"/jcr:root/content/david/*/*/*/element(*, nt:unstructured) order by @created descending"</span>, <span class="code-quote">"xpath"</span>);
+<span class="code-keyword">var</span> result = query.execute().getNodes();
+</pre> 
+</div></div> 
+<p>In this way we have a variable <em>result</em> with a <a href="http://www.day.com/maven/javax.jcr/javadocs/jcr-2.0/javax/jcr/NodeIterator.html" class="external-link" rel="nofollow">NodeIterator</a>&nbsp;object. So we simply have to make a loop on this iterator and print its values</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+&lt;h3&gt;Entries&lt;/h3&gt;
+&lt;div&gt;
+	&lt;h3&gt;&lt;a href='/content/david.pdf'&gt;Export list&lt;/a&gt;&lt;/h3&gt;
+	&lt;%
+	<span class="code-keyword">while</span>(result.hasNext()) {
+		post = result.nextNode()
+	%&gt;
+ 
+	&lt;h3&gt; &lt;a href=<span class="code-quote">"&lt;%= post.getPath() %&gt;.article"</span>&gt;&lt;%=post.title%&gt;&lt;/a&gt; -
+	&lt;a href=<span class="code-quote">"&lt;%= post.getPath() %&gt;.edit"</span>&gt;EDIT&lt;/a&gt; -
+	&lt;a id=<span class="code-quote">"&lt;%= post.getPath() %&gt;"</span> class=<span class="code-quote">"delete"</span> href=<span class="code-quote">"#"</span>&gt;DELETE&lt;/a&gt; -
+	&lt;a href=<span class="code-quote">"&lt;%= post.getPath() %&gt;.pdf"</span>&gt;&lt;img alt=<span class="code-quote">"Get pdf"</span> src=<span class="code-quote">"/libs/images/pdf-icon.png"</span>&gt;&lt;/a&gt;
+	&lt;/h3&gt;
+ 
+	&lt;%
+	}
+	%&gt;
+ 
+&lt;/div&gt;
+</pre> 
+</div></div> 
+<p>The result is something like the following image</p> 
+ 
+<p><span class="image-wrap" style=""><img src="http://localhost:8080/libs/images/list.png" style="border: 0px solid black" /></span></p> 
+ 
+<p>When you click on the article, you call the <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/article.esp" class="external-link" rel="nofollow">/apps/david/article.esp</a> script, that is a simple script where the contents of article are rendered. For the others links, read the following paragraphs.</p> 
+ 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

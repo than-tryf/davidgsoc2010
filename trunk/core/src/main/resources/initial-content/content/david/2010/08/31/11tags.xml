@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>tags</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>4604fda2-a2d1-46ba-bb5f-370a650d62b4</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>tags</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Generate the tags content structure</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Generate the tags content structure</title> </head> <body>
+<p>David manages a simple tagging system for the articles.&nbsp;The tags related to the article, that user insert in the <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/new.esp" class="external-link" rel="nofollow">new.esp</a> page, are saved as a multi-value property on the article node.</p> 
+ 
+<p>In addition to this, there is also a redundant structure to achieve the tags information, as shown in the next image</p> 
+ 
+ 
+<p><span class="image-wrap" style=""><img src="http://localhost:8080/libs/images/tag-jcr-structure.png" style="border: 0px solid black" /></span></p> 
+ 
+ 
+<p>So David must manage tags in the creation of the article and in its removal. To accomplish these tasks I used a two different approach.</p> 
+ 
+<p>For the creation of the article there is a component deployed in Apache Sling. This component listens for the creation of a new Node and manage the add of tag values.</p> 
+ 
+<p>This service is implemented in the class&nbsp;<a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/java/sling/gsoc/david/jcr/TagGenerator.java" class="external-link" rel="nofollow">sling.gsoc.david.jcr.TagGenerator</a>. This class is a OSGi component, with annotations that define it as a component (see <a href="http://felix.apache.org/site/apache-felix-maven-scr-plugin.html" class="external-link" rel="nofollow">Maven SCR Plugin</a> for more details)</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+@Component(metatype = <span class="code-keyword">false</span>, immediate = <span class="code-keyword">true</span>)
+</pre> 
+</div></div> 
+<p>Using the annotations we have also the reference to <a href="http://svn.apache.org/repos/asf/sling/trunk/bundles/jcr/api/src/main/java/org/apache/sling/jcr/api/SlingRepository.java" class="external-link" rel="nofollow">SlingRepository</a>, that will be used to gain access to Sling repository</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+@Reference@Reference
+<span class="code-keyword">private</span> SlingRepository repository;
+<span class="code-keyword">private</span> SlingRepository repository;<span class="code-keyword">private</span> SlingRepository repository;
+</pre> 
+</div></div> 
+ 
+<p>Being an OSGi Component there is the implementation of&nbsp;<font color="#0000ff"><b><em>activate</em></b></font> and <font color="#0000ff"><b><em>deactivate</em></b></font> methods, which is called when the component is activated/deactivated.</p> 
+ 
+<p><a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/java/sling/gsoc/david/jcr/TagGenerator.java" class="external-link" rel="nofollow">TagGenerator </a> class implements <a href="http://www.day.com/maven/javax.jcr/javadocs/jcr-2.0/javax/jcr/observation/EventListener.html" class="external-link" rel="nofollow">EventListener </a> interface, so in the <font color="#0000ff"><b><em>onEvent</em></b></font> method we add the tags of the created node to the tagging structure.</p> 
+ 
+<p>When we delete a node, we can see that there is another AJAX call in the <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/list.esp" class="external-link" rel="nofollow">/apps/david/list.esp</a> script before the real removal. There is a call which uses the&nbsp;<font color="#0000ff"><b><em>:operation=deletetag</em></b></font> parameter.</p> 
+ 
+<p>This operation is implemented by David, using the&nbsp;<a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/java/sling/gsoc/david/operation/DeleteTagOperation.java" class="external-link" rel="nofollow">sling.gsoc.david.operation.DeleteTagOperation</a> class. In Sling you can define new operations extending <a href="http://svn.apache.org/repos/asf/sling/trunk/bundles/servlets/post/src/main/java/org/apache/sling/servlets/post/SlingPostOperation.java" class="external-link" rel="nofollow">SlingPostOperation</a>. The new operation is defined with the constant&nbsp;<font color="#0000ff"><b><em>sling.post.operation&nbsp;</em></b></font><font color="#000000">as we can see in the next code</font></p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+@Property(value = <span class="code-quote">"deletetag"</span>)
+<span class="code-keyword">static</span> <span class="code-keyword">final</span> <span class="code-object">String</span> OPERATION = <span class="code-quote">"sling.post.operation"</span>;
+</pre> 
+</div></div> 
+<p>When we deploy David, the new operation is registered and every request with this new operation will be managed by our class. When this operation is called, <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/java/sling/gsoc/david/operation/DeleteTagOperation.java" class="external-link" rel="nofollow">DeleteTagOperation</a>&nbsp;select the nodes related to the article tags and remove the UUID of the article from this list. Every operation, the add and the removal, based on the JCR repository must end with a call to the save method of the root node where we added/removed nodes.</p> 
+   
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>about</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>54304d74-c999-4d92-95cf-289d047b93b2</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>about</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Some words about David Mini CMS</value>
+	</property>
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Some words about David Mini CMS</title> </head> <body>
+		<p>This project shows some features of Apache Sling and can be used for educational purpose to move your first steps with this framework.</p> 
+ 
+<p>David uses the following opensource library/technologies:</p> 
+ 
+<ul> 
+	<li><font color="#003366"><a href="http://jquery.com/" class="external-link" rel="nofollow">jQuery&nbsp;</a></font> 1.4.2</li> 
+	<li><a href="http://jqueryui.com/" class="external-link" rel="nofollow">jQueryUI&nbsp;</a> 1.8</li> 
+	<li><a href="http://gmarwaha.com/blog/?p=7" class="external-link" rel="nofollow">LavaLamp </a> &#45; A menu plugin for jQuery with cool hover effects&nbsp;</li> 
+	<li><a href="http://www.roytanck.com/2008/03/06/wordpress-plugin-wp-cumulus-flash-based-tag-cloud/" class="external-link" rel="nofollow">WP-Cumulus SWF</a> &#45;&nbsp;used to display tag cloud</li> 
+	<li><a href="http://itextpdf.com/" class="external-link" rel="nofollow">iText&nbsp;</a></li> 
+	<li><a href="http://ckeditor.com/" class="external-link" rel="nofollow">CKEditor&nbsp;</a></li> 
+</ul> 
+ 
+ 
+<p>The available features are</p> 
+<ul> 
+	<li>CRUD (Create, Read, Update and Delete) for the content</li> 
+	<li>Full HTML creation of article</li> 
+	<li>Creation of PDF rappresentation of a single post or the entire list of contents available</li> 
+	<li>Tagging system</li> 
+	<li>Search by title,text,tag</li> 
+	<li>Send email to someone with the link of article</li> 
+	<li>Background service that checks number of articles/tags in the repository</li> 
+</ul> 
+ 
+ 
+<p>These aren't space age features, but are useful to understand how to create an application using Apache Sling</p> 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>
