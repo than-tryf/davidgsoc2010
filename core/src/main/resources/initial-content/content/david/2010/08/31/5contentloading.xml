@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>contentloading</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>fd665550-1980-4c8f-90aa-5c02a0b0dc5d</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>loading</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Content loading</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Content loading</title> </head> <body>
+		<p>You can setup some initial contents that can be used in your application. It is a useful thing, because with a simple configuration you have some nodes already created when your application starts.</p> 
+ 
+<p>In David there are two different nodes created when you deploy your application: <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/content/david.json" class="external-link" rel="nofollow">/content/david</a> and <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/content/tags.json" class="external-link" rel="nofollow">/content/tags</a> .</p> 
+ 
+<p>These nodes are defined in the application folders, using a JSON format. Every information stored in these JSON will be a property of the created nodes.&nbsp;</p> 
+ 
+<p>The most important property is the next one</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+<span class="code-quote">"sling:resourceType"</span>: <span class="code-quote">"david"</span> 
+</pre> 
+</div></div> 
+<p>This property defines "david" as resource type, so Sling knows that it will search under the folder /apps/david to find the scripts that will be called on this node.</p> 
+ 
+<p>These JSON files are loaded using the <a href="http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html" class="external-link" rel="nofollow">Maven Bundle Plugin</a> , as you can see in the David <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/pom.xml" class="external-link" rel="nofollow">core/pom.xml</a> file&nbsp;</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+&lt;!-- initial content to be loaded on bundle installation --&gt;
+&lt;Sling-Initial-Content&gt;
+	initial-content;overwrite:=<span class="code-keyword">true</span>;uninstall:=<span class="code-keyword">true</span> 
+&lt;/Sling-Initial-Content&gt;                 
+</pre> 
+</div></div> 
+<p>JSON isn't the only way to load initial content. Further informations about content loading can be found in the <a href="http://sling.apache.org/site/content-loading-jcrcontentloader.html" class="external-link" rel="nofollow">Content Loading Bundle Documentation</a>.</p> 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

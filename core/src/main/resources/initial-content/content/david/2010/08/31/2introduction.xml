@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>introduction</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>f3a0d54a-4593-439d-8618-4eb4fb0876af</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value>
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>introduction</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Introduction</value>
+	</property>
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Introduction</title> </head> <body>
+<p>Apache Sling is an opensource project with a lot of technologies and features. The goal of this project is to create a mini-CMS, that developers can use to understand how to develop a simple application with Sling. So it is necessary to know a little about two main topics: OSGi and JCR. The following links are useful resources to read something about these technologies.</p>
+<p>
+<b>OSGi</b>
+<ul>
+<li><a href='http://en.wikipedia.org/wiki/OSGi'>http://en.wikipedia.org/wiki/OSGi</a></li>
+<li><a href='http://felix.apache.org/'>http://felix.apache.org/</a></li>
+<li><a href='http://www.osgi.org/Links/BasicEducation'>http://www.osgi.org/Links/BasicEducation</a></li>
+</ul>
+</p>
+<p>
+<b>JCR</b>
+<ul>
+<li><a href='http://jackrabbit.apache.org/'>http://jackrabbit.apache.org/</a></li>
+<li><a href='http://www.ibm.com/developerworks/java/library/j-jcr/'>http://www.ibm.com/developerworks/java/library/j-jcr/</a></li>
+<li><a href='http://wiki.apache.org/jackrabbit/DavidsModel'>http://wiki.apache.org/jackrabbit/DavidsModel</a></li>
+</ul>
+</p>
+<p>
+The repository for this project can be found at <a href='http://code.google.com/p/davidgsoc2010/'>http://code.google.com/p/davidgsoc2010/</a>
+		 
+		 </p> 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

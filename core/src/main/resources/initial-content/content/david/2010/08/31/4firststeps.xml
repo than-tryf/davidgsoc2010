@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>firststeps</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>9242f993-0fdd-480b-b91b-ce22d1d2d25c</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>firststeps</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>First steps into Sling</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>First steps into Sling</title> </head> <body>
+		<p>Firstly you must setup the environment for Sling, so you can follow the guide at&nbsp;<a href="http://sling.apache.org/site/getting-and-building-sling.html" class="external-link" rel="nofollow">http://sling.apache.org/site/getting-and-building-sling.html</a>.</p> 
+ 
+<p>Now that you created your environment, you can setup some other tools that can be useful during the development:</p> 
+<ul> 
+	<li><a href="http://curl.haxx.se/" class="external-link" rel="nofollow">cURL</a> : Command line tool to send HTTP request</li> 
+	<li><a href="http://svn.apache.org/repos/asf/sling/trunk/contrib/explorers/jquery/" class="external-link" rel="nofollow">JCR Explorer</a> : Extension that create a useful explorer for the JCR repository you are working in</li> 
+	<li><a href="http://www.bitkinex.com/" class="external-link" rel="nofollow">BitKinex</a> :&nbsp;FTP/SFTP/HTTP/WebDAV Client that can be used to manage the files you uploaded in Sling</li> 
+</ul> 
+ 
+ 
+<p>It's time to make our "Hello world" in Apache Sling.&nbsp;<br/> 
+Open a console and simply launch the next command:</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+curl -F<span class="code-quote">"sling:resourceType=foo/bar"</span> -F<span class="code-quote">"title=Hello world"</span> http:<span class="code-comment">//admin:admin@localhost:8080/content/myfirstnode</span> 
+</pre> 
+</div></div> 
+ 
+<p>This is a simple HTTP request, where you pass some parameters and values. Using it you have created a first resource under Sling.&nbsp;<br/> 
+The resource is a JCR node, as every resource in Sling, put under folder /content. This node has two parameters, title and sling:resourceType.&nbsp;</p> 
+ 
+<p>Node creation is a simple task, but you must understand how you can render the information stored in the nodes using Sling.<br/> 
+The first document you can read is the next one:&nbsp;<a href="http://dev.day.com/content/ddc/blog/2008/07/cheatsheet/_jcr_content/par/download/file.res/cheatsheet.pdf" class="external-link" rel="nofollow">http://dev.day.com/content/ddc/blog/2008/07/cheatsheet/_jcr_content/par/download/file.res/cheatsheet.pdf</a>.&nbsp;It simply describes how content resolution works in Sling.&nbsp;</p> 
+ 
+<p>Another important information to better understand Sling, is that a resource is rendered by a script.<br/> 
+Script files are stored under the folders /apps or /libs and there is a wide choice of possible scripting engine:&nbsp;</p> 
+<ul> 
+	<li>ESP</li> 
+	<li>JSP</li> 
+	<li>Java Servlet</li> 
+	<li>Scala</li> 
+	<li>Python</li> 
+	<li>Groovy</li> 
+	<li>Ruby</li> 
+</ul> 
+ 
+ 
+<p>To select a script, Sling uses the node's sling:resourceType property. So if we say that&nbsp;sling:resourceType is foo/bar, Sling will search under the /apps/foo/bar/ folder.<br/> 
+The following links describes how the scripts work and what type of variables we have during the script execution:</p> 
+<ul> 
+	<li><a href="https://cwiki.apache.org/SLING/scripting-variables.html" class="external-link" rel="nofollow">https://cwiki.apache.org/SLING/scripting-variables.html</a></li> 
+	<li><a href="https://cwiki.apache.org/SLING/url-to-script-resolution.html" class="external-link" rel="nofollow">https://cwiki.apache.org/SLING/url-to-script-resolution.html</a></li> 
+</ul> 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

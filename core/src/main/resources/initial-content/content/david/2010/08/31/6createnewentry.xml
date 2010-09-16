@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>createnewentry</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>64063d2d-8b57-4241-8be9-358a8cefde4e</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>create</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Create new entry</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Create new entry</title> </head> <body>
+		<p>There is a script that provide this basic function, <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/new.esp" class="external-link" rel="nofollow">/apps/david/new.esp</a>. As you can see in David I choose the ESP scripting language, but as we already said, you can choose among a lot of scripting engines with Sling. This script loads two other script files, used in every script of David: <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/header.esp" class="external-link" rel="nofollow">/apps/david/header.esp</a> and <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/menu.esp" class="external-link" rel="nofollow">/apps/david/menu.esp</a>. These scripts, as the name suggests, contain header informations and the menu for David.&nbsp;</p> 
+ 
+<p>In the header there are jQuery functions and CSS definitions, useful for the whole CMS. In the menu script we can find the definition of a classic menu.</p> 
+ 
+<p>Turning back to the new.esp script, we can see in the following code as header and menu are loaded, using an ESP function.</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+...
+...
+&lt;title&gt;David Mini CMS&lt;/title&gt;
+&lt;%
+load(<span class="code-quote">"header.esp"</span>);
+%&gt;
+ 
+&lt;/head&gt;
+&lt;body onload=<span class="code-quote">"checkAuth()"</span>&gt;
+	&lt;div id=<span class="code-quote">"lCenter"</span>&gt;
+	&lt;div id=<span class="code-quote">"desktop"</span>&gt;
+	&lt;%
+	load(<span class="code-quote">"menu.esp"</span>);
+	%&gt;
+	&lt;div id=<span class="code-quote">"contentPanel"</span> class=<span class="code-quote">"centralPanel"</span>&gt;
+...
+...
+</pre> 
+</div></div> 
+<p>So we loaded these two scripts in new.esp. In addition to this, in this script we defined a simple form, with some input texts and a CKEditor panel.&nbsp;</p> 
+ 
+<p>Once the user fills the input, the page is like in the following image</p> 
+ 
+<p><span class="image-wrap" style=""><img src="http://localhost:8080/libs/images/new.png" style="border: 0px solid black" /></span></p> 
+ 
+<p>The submit button of this page is bounded to a jQuery function defined in the <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/header.esp" class="external-link" rel="nofollow">header.esp</a> file. To create a new entry we have only to create a HTTP POST request, including the informations the user put in the input texts. The function that create the new entry is the following:</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+......
+...
+<span class="code-comment">//Function called when there is a click of the
+</span><span class="code-comment">//submit button in <span class="code-keyword">new</span>.esp page
+</span>$('#button').click(function() {
+ 
+    <span class="code-comment">//Retrieve the input texts from the HTML
+</span>    <span class="code-keyword">var</span> title = $(<span class="code-quote">"#title"</span>).val();
+    <span class="code-keyword">var</span> text = $(<span class="code-quote">"#editor1"</span>).val();
+    <span class="code-keyword">var</span> editor_data = CKEDITOR.instances.editor1.getData();
+    text=editor_data;
+    <span class="code-keyword">var</span> tagValues = $(<span class="code-quote">"#tags"</span>).val();
+ 
+    <span class="code-comment">//Now create a list with tags
+</span>    tagValues=tagValues.split(<span class="code-quote">","</span>);
+ 
+ 
+    <span class="code-keyword">for</span>(<span class="code-keyword">var</span> i=0; i&lt;tagValues.length; i++) {
+	tagValues[i] = tagValues[i].replace(/ /g,'');
+    }
+ 
+    <span class="code-keyword">var</span> token = <span class="code-keyword">new</span> Array();
+    <span class="code-keyword">for</span>(<span class="code-keyword">var</span> i=0; i&lt;tagValues.length; i++)
+		<span class="code-keyword">if</span>(tagValues[i] != "")
+			token.push(tagValues[i]);
+ 
+    <span class="code-comment">//Every information is stored in the <span class="code-quote">"data"</span> variable
+</span>    <span class="code-comment">//sling:resourceType tells the repository that <span class="code-keyword">this</span> entry is a David one
+</span>    <span class="code-comment">//jcr:mixinTypes=mix:referenceable defines <span class="code-keyword">this</span> entry as referenceable (see JCR)       
+</span>    <span class="code-keyword">var</span> data=<span class="code-quote">"title="</span>+title+<span class="code-quote">"&amp;text="</span>+text+<span class="code-quote">"&amp;sling:resourceType=david&amp;jcr:mixinTypes=mix:referenceable"</span>;
+ 
+    <span class="code-keyword">for</span> (<span class="code-keyword">var</span> j = 0 ; j &lt; token.length ; j++){
+		data=data.concat(<span class="code-quote">"&amp;tag="</span>+token[j]);
+    }
+ 
+    <span class="code-comment">//The current date will be used to create the folders
+</span>    <span class="code-comment">//in the Sling repository where we will put the content
+</span>    <span class="code-keyword">var</span> currentDate = <span class="code-keyword">new</span> Date();
+    <span class="code-keyword">var</span> year = currentDate.getYear()+1900;
+    <span class="code-keyword">var</span> month = currentDate.getMonth()+1;
+    <span class="code-keyword">var</span> day = currentDate.getDate()+1;
+ 
+    <span class="code-keyword">if</span> (month&lt;10)
+	month = <span class="code-quote">"0"</span> + month;
+    <span class="code-keyword">if</span> (day&lt;10)
+	day = <span class="code-quote">"0"</span> + day;
+ 
+ 
+    <span class="code-comment">//The url is under the David root node /content/david
+</span>    <span class="code-comment">//created during the initial content loading
+</span>    <span class="code-keyword">var</span> url=<span class="code-quote">"/content/david/"</span>+year+<span class="code-quote">"/"</span>+month+<span class="code-quote">"/"</span>+day+<span class="code-quote">"/"</span>;
+ 
+    <span class="code-comment">//Simple AJAX call to create a HTTP POST request
+</span>    $.ajax({
+	type: <span class="code-quote">"POST"</span>,
+	url: url,
+	data: data,
+	success: function(msg){
+		alert(<span class="code-quote">"Entry saved"</span>);
+		window.location = <span class="code-quote">"/content/david.html"</span>;
+	},
+	error: function(msg){
+		alert(<span class="code-quote">"Error during save"</span>);
+	}
+    });
+});
+...
+...
+...
+</pre> 
+</div></div> 
+<p>If we click on the button and everything goes well, we will see a popup with the text "Entry saved" and our article will be in the repository at the path <font color="#3366ff"><b><em>/content/david/YEAR/MONTH/DAY/somethingliketitle</em></b></font><em>.</em></p> 
+ 
+<p>As you can see, there isn't a definition for the name of the entry but anyway we will have this entry saved...how is it possible?</p> 
+ 
+<p>The request URL we created is where we would like to insert our entry. If this URL already exist, we will only update properties of this node (and so you can already understand that the edit page will be equal to this one).</p> 
+ 
+<p>If the resource doesn't exist, a new item is created. If the resource name ends with /&#42; or /, the name of the item will be created using an algorith that also uses the name of new node. The creation of the new node goes through the <a href="http://svn.apache.org/repos/asf/sling/trunk/bundles/servlets/post/src/main/java/org/apache/sling/servlets/post/impl/SlingPostServlet.java" class="external-link" rel="nofollow">SlingPostServlet</a> , a frontend for the content manipulation. This servlet provides also other content operations, as described <a href="http://sling.apache.org/site/manipulating-content-the-slingpostservlet-servletspost.html" class="external-link" rel="nofollow">here</a>.</p> 
+ 
+<p>In the HTTP POST request there are also some others fields:</p> 
+ 
+<ul> 
+	<li><font color="#0000ff"><b><em>sling:resourceType=david</em></b></font> : This information is stored on the new node, so when we will retrieve this node from the browser, using any extension (for example .article provided by <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/article.esp" class="external-link" rel="nofollow">/apps/david/article.esp</a> ) Sling will search under the folder /apps/david.&nbsp;</li> 
+	<li><font color="#0000ff"><b><em>jcr:mixinTypes=mix:referenceable</em></b></font> : Another information that will be stored. In that way this node can be <a href="http://www.day.com/specs/jcr/1.0/4.9_Referenceable_Nodes.html" class="external-link" rel="nofollow">referenceable</a>. This feature will be useful for the tags management.</li> 
+</ul> 
+ 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

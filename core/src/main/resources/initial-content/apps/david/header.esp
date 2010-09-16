@@ -14,6 +14,7 @@
 
 <script type="text/javascript" src="/libs/jquery-ui-1.8.custom.min.js"></script>
 <link type="text/css" href="/libs/jquery-ui-1.8.custom.css" rel="stylesheet" />
+<link type="text/css" href="/libs/batch.css" rel="stylesheet" />
 
 <script type="text/javascript" src="/libs/ui.panel.min.js"></script>
 <link type="text/css" href="/libs/ui.panel.css" rel="stylesheet" />

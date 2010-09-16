@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>editentry</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>9242fbfe-23cd-442d-90b3-570af93e066f</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>edit</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Edit existing entry</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Edit existing entry</title> </head> <body>
+		
+<p>As said before, the update operation is really similar to the creation of new content. Anyway in David there a separated script to handle this operation, <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/edit.esp" class="external-link" rel="nofollow">/apps/david/edit.esp</a>.&nbsp;</p> 
+ 
+<p>It's an unuseful script, because also this operation can call <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/new.esp" class="external-link" rel="nofollow">new.esp</a>. There is a need of a bit refactory about it.</p> 
+ 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

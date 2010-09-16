@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>createpdf</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>baeec4b3-3baa-4235-965a-44ac34bda76f</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>pdf</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Create PDF renditions</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Create PDF renditions</title> </head> <body>
+		<p>Every node in David is an article and it's an easy task to render it as PDF file.</p> 
+ 
+<p>First of all there is a link on every articles and on the main list that links to</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+http:<span class="code-comment">//localhost:8080/content/david/2010/08/14/myarticle.pdf</span> 
+</pre> 
+</div></div> 
+<p>So it's a new extension called for the node. This extension, as we already have seen, can be managed by a Java class defined in our bundle and deployed on Sling. In David the PDF Extension is managed by <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/java/sling/gsoc/david/servlet/PdfExtension.java" class="external-link" rel="nofollow">sling.gsoc.david.servlet.PdfExtension</a>. In this component there is the rendering of the node using <a href="http://itextpdf.com/" class="external-link" rel="nofollow">iText library</a>&nbsp;and the node, for which this component can be activated, can be a standard article or the root node.&nbsp;</p> 
+ 
+<p>If this extension is used with a standard article, the following image is what we will give</p> 
+ 
+ 
+<p><span class="image-wrap" style=""><img src="http://localhost:8080/libs/images/pdf.png" style="border: 0px solid black" /></span></p> 
+ 
+<p>In the other case, we will have a PDF with the list of articles in David.</p> 
+ 
+<p><span class="image-wrap" style=""><img src="http://localhost:8080/libs/images/pdflist.png" style="border: 0px solid black" /></span></p> 
+ 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

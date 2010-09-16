@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>searchentries</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>be9dd282-9f71-4e16-a518-3287638b03fc</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>search</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Search for entries</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Search for entries</title> </head> <body>
+		
+<p>Also the search is based on ESP script, <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/search.esp" class="external-link" rel="nofollow">/apps/david/search.esp</a> . The user can make three different type of search: by title, by text and by tag. The search with title or text are executed using a XPATH query like this</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+<span class="code-keyword">var</span> query = queryManager.createQuery(
+	<span class="code-quote">"/jcr:root/content/david/*/*/*/element(*, nt:unstructured)[jcr:like(@title, '%"</span>+request.getParameter(<span class="code-quote">"qtitle"</span>)+"%')] 
+	order by @created descending<span class="code-quote">", "</span>xpath");
+</pre> 
+</div></div> 
+<p>This query searches the entry with title LIKE (as in SQL) the parameter submitted.</p> 
+ 
+<p>The tag search is a bit different, because the structure of tags in David make it possible to search under the root node /content/tags, where we save the tags informations. So the query is like the following one</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+<span class="code-keyword">var</span> searchString =  
+<span class="code-quote">"/jcr:root/content/tags<span class="code-comment">//element(*,nt:unstructured)[fn:name()= '"</span>+request.getParameter(<span class="code-quote">"qtag"</span>)+<span class="code-quote">"'] order by @created descending"</span>;</span> 
+</pre> 
+</div></div> 
+<p>The initial form to perform the search is a simple HTML one, as you can see in the following image</p> 
+ 
+ 
+<p><span class="image-wrap" style=""><img src="http://localhost:8080/libs/images/search.png" style="border: 0px solid black" /></span></p> 
+ 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

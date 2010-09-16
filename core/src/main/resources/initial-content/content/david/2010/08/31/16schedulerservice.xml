@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>schedulerservice</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>0befce5c-f4c6-4391-917f-3fcc51747fbc</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>jcr:created</name>
+		<value>2010-09-15T17:33:22.278+02:00</value>
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>scheduler</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Scheduler service</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Scheduler service</title> </head> <body>
+		<p>Every Sling application can use the opensource scheduler <a href="http://www.quartz-scheduler.org/" class="external-link" rel="nofollow">Quartz</a>, provided by the <a href="http://sling.apache.org/site/scheduler-service-commons-scheduler.html" class="external-link" rel="nofollow">Commons Scheduler bundle</a>&nbsp;(this requires also another bundle,&nbsp;<a href="http://svn.apache.org/repos/asf/sling/trunk/bundles/commons/threads/" class="external-link" rel="nofollow">org.apache.sling.commons.threads</a>).</p> 
+ 
+<p>Based on this scheduler there is a simple service, implemented by <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/java/sling/gsoc/david/job/JobScheduler.java" class="external-link" rel="nofollow">sling.gsoc.job.JobScheduler</a> and <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/java/sling/gsoc/david/job/SendTask.java" class="external-link" rel="nofollow">sling.gsoc.job.SendTask</a>. The first is the class that creates a SendTask and schedules it with Quartz. The second one is a simple class that send informations about David (the number of articles and tags available) with an email.&nbsp;</p> 
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>

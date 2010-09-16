@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<node>
+	<name>deleteentry</name>
+	<primaryNodeType>nt:unstructured</primaryNodeType>
+	
+	<property>
+		<name>jcr:uuid</name>
+		<value>5e39c069-2f0f-4e11-a2d5-4d4df90eedb9</value> 
+	</property>
+	
+	<property>
+		<name>sling:resourceType</name>
+		<value>david</value> 
+	</property>
+	
+	<property>
+		<name>tag</name>
+		<value>delete</value>
+	</property>
+	
+	<property>
+		<name>title</name>
+		<value>Delete existing entry</value>
+	</property> 
+	
+	<property>
+		<name>text</name>
+		<value>
+		<![CDATA[
+		<html> <head> <title>Delete existing entry</title> </head> <body>
+
+<p>The delete operation is an easy task, because we only have to make a HTTP POST request to the article URL, with a special parameter <font color="#3366ff"><b><em>:operation=delete</em></b></font>.</p> 
+ 
+<p>This request is made with a jQuery function bounded to the DELETE link, as you can see in the <a href="http://code.google.com/p/davidgsoc2010/source/browse/trunk/core/src/main/resources/initial-content/apps/david/list.esp" class="external-link" rel="nofollow">/apps/david/list.esp</a> script</p> 
+ 
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"> 
+<pre class="code-java"> 
+$.ajax({$.ajax({
+	type: <span class="code-quote">"POST"</span>,
+   	url: id,
+   	data: <span class="code-quote">":operation=delete"</span>,
+   	success: function(msg){
+        	$(<span class="code-keyword">this</span>).dialog('close');
+        	location.reload();
+   	},
+        error: function(msg){
+        	alert(msg);
+                $(<span class="code-keyword">this</span>).dialog('close');
+        }
+});
+</pre> 
+</div></div> 
+  
+	     </body></html>
+		]]>
+			
+		</value>
+	</property>
+	
+</node>
